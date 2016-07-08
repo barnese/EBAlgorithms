@@ -22,6 +22,9 @@ namespace EBAlgorithmsConsole {
                     case "distance":
                         DocumentDistanceRunner(args);
                         break;
+                    case "insertionsort":
+                        InsertionSort();
+                        break;
                     default:
                         Console.WriteLine("Command not recognized.");
                         break;
@@ -52,6 +55,16 @@ namespace EBAlgorithmsConsole {
             var ratio = distance / (Math.PI / 2);
 
             Console.WriteLine("Difference ratio is {0:N2}", ratio);
+        }
+
+        static void InsertionSort() {
+            var list = new List<int> { 5, 2, 4, 6, 1, 3 };
+            var sortedList = InsertionSort<int>.Sort(list);
+
+            var joinedList = String.Join(", ", sortedList);
+            Console.WriteLine(joinedList);
+
+            Console.WriteLine("sortedList is sorted? {0}", InsertionSort<int>.IsSorted(sortedList));
         }
     }
 }
