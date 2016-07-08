@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EBAlgorithms", "EBAlgorithm
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EBAlgorithmsConsole", "EBAlgorithmsConsole\EBAlgorithmsConsole.csproj", "{CF3284AF-534E-47F8-A668-67C9559FDA90}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EBAlgorithmsUnitTests", "EBAlgorithmsUnitTests\EBAlgorithmsUnitTests.csproj", "{D0FE0A71-AE52-49F3-A9C9-C1F87A09CD5F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{CF3284AF-534E-47F8-A668-67C9559FDA90}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CF3284AF-534E-47F8-A668-67C9559FDA90}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CF3284AF-534E-47F8-A668-67C9559FDA90}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0FE0A71-AE52-49F3-A9C9-C1F87A09CD5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0FE0A71-AE52-49F3-A9C9-C1F87A09CD5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0FE0A71-AE52-49F3-A9C9-C1F87A09CD5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0FE0A71-AE52-49F3-A9C9-C1F87A09CD5F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
