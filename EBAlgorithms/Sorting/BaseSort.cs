@@ -23,5 +23,14 @@ namespace EBAlgorithms {
 
             return true;
         }
+
+        /// <summary>
+        /// Swaps the elements in the given list at the given indices.
+        /// </summary>
+        protected static void Swap(List<T> list, int firstIndex, int secondIndex) {
+            var temp = list[firstIndex];
+            list[firstIndex] = list[secondIndex];
+            list[secondIndex] = temp;
+        }
     }
 }

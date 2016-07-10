@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using EBAlgorithms;
 
 namespace EBAlgorithmsConsole {
@@ -10,28 +7,15 @@ namespace EBAlgorithmsConsole {
         private static string programName = System.AppDomain.CurrentDomain.FriendlyName;
 
         static void Main(string[] args) {
-            if (args.Length == 0) {
-                Console.WriteLine("Usage: {0} <command> <parameters>", programName);
-                return;
-            }
+            // This console program is merely a playground for testing purposes.
+            //try {
+                //DocumentDistanceRunner(args);
+                //InsertionSort();
+                MergeSort();
 
-            var command = args[0].ToLower();
-
-            try {
-                switch (command) {
-                    case "distance":
-                        DocumentDistanceRunner(args);
-                        break;
-                    case "insertionsort":
-                        InsertionSort();
-                        break;
-                    default:
-                        Console.WriteLine("Command not recognized.");
-                        break;
-                }
-            } catch (Exception exception) {
-                Console.WriteLine(exception.Message);
-            }
+            //} catch (Exception exception) {
+            //    Console.WriteLine(exception.Message);
+            //}
         }
 
         /// <summary>
@@ -61,10 +45,21 @@ namespace EBAlgorithmsConsole {
             var list = new List<int> { 5, 2, 4, 6, 1, 3 };
             var sortedList = InsertionSort<int>.Sort(list);
 
-            var joinedList = String.Join(", ", sortedList);
-            Console.WriteLine(joinedList);
+            Print<int>.List(sortedList);
+            Print<int>.IsListSorted(sortedList);
+        }
+        
+        static void MergeSort() {
+            //var list = new List<int> { 1, 99, 4, 23, 89, 54, 55, 29, 20, 67, 74, 9, 3, 88, 61, 40, 92, 30, 1, 72 };
+            //var sortedList = MergeSort<int>.Sort(list);
+            //Print<int>.List(sortedList);
+            //Print<int>.IsListSorted(sortedList);
 
-            Console.WriteLine("sortedList is sorted? {0}", InsertionSort<int>.IsSorted(sortedList));
+            var list = new List<string> { "zebra", "cat", "walrus", "bird", "bobcat", "bear", "snake", "elephant", "giraffe" };
+            var sortedList = MergeSort<string>.Sort(list);
+
+            Print<string>.List(sortedList);
+            Print<string>.IsListSorted(sortedList);
         }
     }
 }

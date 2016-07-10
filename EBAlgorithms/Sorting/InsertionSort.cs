@@ -9,10 +9,8 @@ namespace EBAlgorithms {
     public class InsertionSort<T>: BaseSort<T> where T : IComparable {
 
         /// <summary>
-        /// Sorts a given list using insertion sort.
-        /// </summary>
-        /// <param name="list">The list to sort.</param>
-        /// <returns>Sorted list.</returns>
+        /// Sorts a given list using Insertion Sort.
+        /// </summary>      
         public static List<T> Sort(List<T> list) {
             for (int i = 1; i < list.Count; i++) {
                 var key = list[i];
