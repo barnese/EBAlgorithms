@@ -59,6 +59,8 @@
   <ItemGroup>
     <Content Include="Data\DistanceData1.txt" />
     <Content Include="Data\DistanceData2.txt" />
+    <Content Include="Data\RandomIntList.txt" />
+    <Content Include="Scripts\GenerateRandomIntList.py" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

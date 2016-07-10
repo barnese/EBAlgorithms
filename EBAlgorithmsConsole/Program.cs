@@ -1,21 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using EBAlgorithms;
+using System.IO;
+using System.Text;
 
 namespace EBAlgorithmsConsole {
+
+    // This console program is merely a playground for testing purposes.
     class Program {
         private static string programName = System.AppDomain.CurrentDomain.FriendlyName;
 
         static void Main(string[] args) {
-            // This console program is merely a playground for testing purposes.
-            //try {
-                //DocumentDistanceRunner(args);
-                //InsertionSort();
-                MergeSort();
-
-            //} catch (Exception exception) {
-            //    Console.WriteLine(exception.Message);
-            //}
+            //DocumentDistanceRunner(args);
+            //InsertionSort();
+            //MergeSort();
+            CompareInsertionSortAndMergeSort();
         }
 
         /// <summary>
@@ -60,6 +59,38 @@ namespace EBAlgorithmsConsole {
 
             Print<string>.List(sortedList);
             Print<string>.IsListSorted(sortedList);
+        }
+
+        static void CompareInsertionSortAndMergeSort() {
+            var numberOfValues = 10000;
+            var list = GetRandomIntList(numberOfValues, -10000, 10000);
+
+            var startTime = DateTime.Now;
+
+            InsertionSort<int>.Sort(list);
+
+            var insertionSortRunTime = DateTime.Now - startTime;
+
+            startTime = DateTime.Now;
+
+            MergeSort<int>.Sort(list);
+
+            var mergeSortRunTime = DateTime.Now - startTime;
+
+            Console.WriteLine("Sort list contains {0} values.", numberOfValues);
+            Console.WriteLine("Insertion sort runtime: {0} ms", insertionSortRunTime.TotalMilliseconds);
+            Console.WriteLine("Merge sort runtime: {0} ms", mergeSortRunTime.TotalMilliseconds);
+        }
+
+        static List<int> GetRandomIntList(int size, int minValue, int maxValue) {
+            var list = new List<int>(size);
+            var random = new Random(DateTime.Now.Millisecond);
+
+            for (var i = 0; i < size; i++) {
+                list.Add(random.Next(minValue, maxValue));
+            }
+
+            return list;
         }
     }
 }
