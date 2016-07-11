@@ -6,25 +6,26 @@ using System.Threading.Tasks;
 
 namespace EBAlgorithms {
 
-    public class InsertionSort<T>: BaseSort<T> where T : IComparable {
+    /// <summary>
+    /// List extensions for Insertion Sort.
+    /// </summary>
+    public static class InsertionSortListExtensions {
 
         /// <summary>
-        /// Sorts a given list using Insertion Sort.
-        /// </summary>      
-        public static List<T> Sort(List<T> list) {
+        /// Sorts the current list using Insertion Sort.
+        /// </summary>
+        public static void InsertionSort<T>(this List<T> list) where T : IComparable {
             for (int i = 1; i < list.Count; i++) {
                 var key = list[i];
                 var j = i - 1;
-                
+
                 while (j >= 0 && list[j].CompareTo(key) > 0) { // list[j] > key
                     list[j + 1] = list[j];
                     j = j - 1;
                 }
 
-                list[j + 1] = key;                
+                list[j + 1] = key;
             }
-
-            return list;
         }
     }
 }

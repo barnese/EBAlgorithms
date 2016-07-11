@@ -42,8 +42,8 @@
   <ItemGroup>
     <Compile Include="DocumentDistanceFinder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Sorting\BaseSort.cs" />
     <Compile Include="Sorting\InsertionSort.cs" />
+    <Compile Include="Sorting\ListSortExtensions.cs" />
     <Compile Include="Sorting\MergeSort.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

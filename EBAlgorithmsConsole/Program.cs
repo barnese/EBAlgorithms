@@ -13,8 +13,8 @@ namespace EBAlgorithmsConsole {
         static void Main(string[] args) {
             //DocumentDistanceRunner(args);
             //InsertionSort();
-            //MergeSort();
-            CompareInsertionSortAndMergeSort();
+            MergeSort();
+            //CompareInsertionSortAndMergeSort();
         }
 
         /// <summary>
@@ -41,24 +41,17 @@ namespace EBAlgorithmsConsole {
         }
 
         static void InsertionSort() {
-            var list = new List<int> { 5, 2, 4, 6, 1, 3 };
-            var sortedList = InsertionSort<int>.Sort(list);
-
-            Print<int>.List(sortedList);
-            Print<int>.IsListSorted(sortedList);
+            var list = new List<int> { 1, 99, 4, 23, 89, 54, 55, 29, 20, 67, 74, 9, 3, 88, 61, 40, 92, 30, 1, 72 };
+            list.InsertionSort();
+            list.Print();
+            list.PrintIsSorted();
         }
         
         static void MergeSort() {
-            //var list = new List<int> { 1, 99, 4, 23, 89, 54, 55, 29, 20, 67, 74, 9, 3, 88, 61, 40, 92, 30, 1, 72 };
-            //var sortedList = MergeSort<int>.Sort(list);
-            //Print<int>.List(sortedList);
-            //Print<int>.IsListSorted(sortedList);
-
             var list = new List<string> { "zebra", "cat", "walrus", "bird", "bobcat", "bear", "snake", "elephant", "giraffe" };
-            var sortedList = MergeSort<string>.Sort(list);
-
-            Print<string>.List(sortedList);
-            Print<string>.IsListSorted(sortedList);
+            list.MergeSort();
+            list.Print();
+            list.PrintIsSorted();
         }
 
         static void CompareInsertionSortAndMergeSort() {
@@ -67,13 +60,13 @@ namespace EBAlgorithmsConsole {
 
             var startTime = DateTime.Now;
 
-            InsertionSort<int>.Sort(list);
+            list.InsertionSort();
 
             var insertionSortRunTime = DateTime.Now - startTime;
 
             startTime = DateTime.Now;
 
-            MergeSort<int>.Sort(list);
+            list.MergeSort();
 
             var mergeSortRunTime = DateTime.Now - startTime;
 
