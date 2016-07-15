@@ -9,12 +9,28 @@ namespace EBAlgorithms {
     public static class ListSortExtensions {
 
         /// <summary>
+        /// Sorts the current list using Heap Sort.
+        /// </summary>
+        public static void HeapSort<T>(this List<T> list, HeapSortType type = HeapSortType.MinHeap) where T : IComparable {
+            var heapSort = new HeapSort<T>(list);
+            heapSort.Sort(type);
+        }
+
+        /// <summary>
+        /// Sorts the current list using Merge Sort.
+        /// </summary>
+        public static void MergeSort<T>(this List<T> list) where T : IComparable {
+            var mergeSort = new MergeSort<T>(list);
+            mergeSort.Sort();
+        }
+
+        /// <summary>
         /// Determines if the list is sorted.
         /// </summary>
-        public static bool IsSorted<T>(this List<T> list) where T : IComparable {
+        public static bool IsSorted<T>(this List<T> list, SortDirection direction = SortDirection.Ascending) where T : IComparable {
             for (int i = 1; i < list.Count; i++) {
-                // list[i - 1] > list[i]
-                if (list[i - 1].CompareTo(list[i]) > 0) {
+
+                if (list[i - 1].CompareTo(list[i]) * (int)direction > 0) {
                     return false;
                 }
             }

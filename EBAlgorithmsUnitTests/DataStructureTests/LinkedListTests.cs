@@ -9,13 +9,13 @@ namespace EBAlgorithmsUnitTests.DataStructureTests {
         private LinkedList<int> list = new LinkedList<int>();
 
         [TestMethod]
-        public void Test_LinkedList_Add() {
+        public void LinkedList_Add() {
             list.Add(10);
             Assert.AreEqual(list.Count(), 1);
         }
 
         [TestMethod]
-        public void Test_LinkedList_Delete() {
+        public void LinkedList_Delete() {
             list.Add(5);
             list.Delete(5);
             Assert.AreEqual(list.Count(), 0);
@@ -28,7 +28,7 @@ namespace EBAlgorithmsUnitTests.DataStructureTests {
         }
 
         [TestMethod]
-        public void Test_LinkedList_Describe() {
+        public void LinkedList_Describe() {
             list.Add(2);
             list.Add(4);
             list.Add(6);
@@ -37,7 +37,7 @@ namespace EBAlgorithmsUnitTests.DataStructureTests {
         }
 
         [TestMethod]
-        public void Test_LinkedList_Get() {
+        public void LinkedList_Get() {
             list.Add(1);
             list.Add(2);
             list.Add(3);
@@ -46,7 +46,7 @@ namespace EBAlgorithmsUnitTests.DataStructureTests {
         }
 
         [TestMethod]
-        public void Test_LinkedListInsert_Before() {
+        public void LinkedListInsert_Before() {
             list.InsertBefore(0, 3);
             Assert.AreEqual(list.Count(), 1);
 

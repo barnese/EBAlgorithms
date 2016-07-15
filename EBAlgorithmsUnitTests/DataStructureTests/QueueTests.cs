@@ -9,13 +9,13 @@ namespace EBAlgorithmsUnitTests.DataStructureTests {
         Queue<String> queue = new Queue<String>();
 
         [TestMethod]
-        public void Test_Queue_Enqueue() {
+        public void Queue_Enqueue() {
             queue.Enqueue("abc");
             Assert.IsFalse(queue.IsEmpty());
         }
 
         [TestMethod]
-        public void Test_Queue_Dequeue() {
+        public void Queue_Dequeue() {
             var data = "abc";
             queue.Enqueue(data);
             var dequeuedData = queue.Dequeue();

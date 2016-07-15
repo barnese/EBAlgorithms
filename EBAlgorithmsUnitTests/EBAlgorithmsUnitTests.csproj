@@ -45,7 +45,9 @@
     </When>
     <Otherwise>
       <ItemGroup>
-        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework">
+          <Private>False</Private>
+        </Reference>
       </ItemGroup>
     </Otherwise>
   </Choose>
@@ -53,8 +55,10 @@
     <Compile Include="AlgorithmTests\DocumentDistanceFinderTests.cs" />
     <Compile Include="AlgorithmTests\InsertionSortTests.cs" />
     <Compile Include="AlgorithmTests\MergeSortTests.cs" />
+    <Compile Include="AlgorithmTests\HeapSortTests.cs" />
     <Compile Include="DataStructureTests\LinkedListTests.cs" />
     <Compile Include="DataStructureTests\QueueTests.cs" />
+    <Compile Include="Data\TestData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

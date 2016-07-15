@@ -49,6 +49,7 @@
     <Compile Include="Sorting\InsertionSort.cs" />
     <Compile Include="Sorting\ListSortExtensions.cs" />
     <Compile Include="Sorting\MergeSort.cs" />
+    <Compile Include="Sorting\SortDirection.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -3,30 +3,29 @@ using System.Collections.Generic;
 
 namespace EBAlgorithms {
 
-    /// <summary>
-    /// List extensions for Merge Sort.
-    /// </summary>
-    public static class MergeSortListExtensions {
-        
-        /// <summary>
-        /// Sorts the current list using Merge Sort.
-        /// </summary>
-        public static void MergeSort<T>(this List<T> list) where T : IComparable {
-            DivideAndConquer(list, 0, list.Count - 1);
+    public class MergeSort<T> where T : IComparable {
+        private List<T> list;
+
+        public MergeSort(List<T> list) {
+            this.list = list;
         }
 
-        private static void DivideAndConquer<T>(List<T> list, int leftIndex, int rightIndex) where T : IComparable {
+        public void Sort() {
+            DivideAndConquer(0, list.Count - 1);
+        }
+
+        private void DivideAndConquer(int leftIndex, int rightIndex) {
             if (rightIndex > leftIndex) {
                 int midIndex = (leftIndex + rightIndex) / 2;
 
-                DivideAndConquer(list, leftIndex, midIndex);
-                DivideAndConquer(list, midIndex + 1, rightIndex);
+                DivideAndConquer(leftIndex, midIndex);
+                DivideAndConquer(midIndex + 1, rightIndex);
 
-                Merge(list, leftIndex, midIndex + 1, rightIndex);
+                Merge(leftIndex, midIndex + 1, rightIndex);
             }
         }
 
-        private static void Merge<T>(List<T> list, int leftIndex, int midIndex, int rightIndex) where T : IComparable {
+        private void Merge(int leftIndex, int midIndex, int rightIndex) {
             var count = rightIndex - leftIndex + 1;
             var leftEndIndex = midIndex - 1;
             var sortedSubList = new List<T>(list);
