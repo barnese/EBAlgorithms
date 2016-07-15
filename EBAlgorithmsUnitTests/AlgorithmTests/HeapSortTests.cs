@@ -16,7 +16,7 @@ namespace EBAlgorithmsUnitTests {
 
             Assert.IsTrue(list.IsSorted());
 
-            list.HeapSort(HeapSortType.MaxHeap);
+            list.HeapSort(SortDirection.Descending);
 
             Assert.IsTrue(list.IsSorted(SortDirection.Descending));
         }
@@ -29,7 +29,7 @@ namespace EBAlgorithmsUnitTests {
 
             Assert.IsTrue(list.IsSorted());
 
-            list.HeapSort(HeapSortType.MaxHeap);
+            list.HeapSort(SortDirection.Descending);
 
             Assert.IsTrue(list.IsSorted(SortDirection.Descending));
         }

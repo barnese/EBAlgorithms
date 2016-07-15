@@ -11,9 +11,9 @@ namespace EBAlgorithms {
         /// <summary>
         /// Sorts the current list using Heap Sort.
         /// </summary>
-        public static void HeapSort<T>(this List<T> list, HeapSortType type = HeapSortType.MinHeap) where T : IComparable {
+        public static void HeapSort<T>(this List<T> list, SortDirection sortDirection = SortDirection.Ascending) where T : IComparable {
             var heapSort = new HeapSort<T>(list);
-            heapSort.Sort(type);
+            heapSort.Sort(sortDirection);
         }
 
         /// <summary>

@@ -3,22 +3,18 @@ using System.Collections.Generic;
 
 namespace EBAlgorithms {
 
-    public enum HeapSortType {
-        MaxHeap = -1,
-        MinHeap = 1
-    }
-
     public class HeapSort<T> where T : IComparable {
 
         private List<T> list;
-        private HeapSortType type;
+        private SortDirection sortDirection;
 
         public HeapSort(List<T> list) {
             this.list = list;
         }
 
-        public void Sort(HeapSortType type = HeapSortType.MinHeap) {
-            this.type = type;
+        public void Sort(SortDirection sortDirection = SortDirection.Ascending) {
+            // Ascending creates a min-heap, descending creates a max-heap.
+            this.sortDirection = sortDirection;
 
             BuildHeap();
 
@@ -51,12 +47,12 @@ namespace EBAlgorithms {
                 var child = root * 2 + 1;
 
                 // For MinHeap: If the right child is greater than the left child, use it. MaxHeap: Vice versa.
-                if (child + 1 <= end && list[child + 1].CompareTo(list[child]) * (int)type > 0) {
+                if (child + 1 <= end && list[child + 1].CompareTo(list[child]) * (int)sortDirection > 0) {
                     child++;
                 }
 
                 // For MinHeap: Is the largest child greater than the root? For MaxHeap: Vice versa.
-                if (list[child].CompareTo(list[root]) * (int)type > 0) {
+                if (list[child].CompareTo(list[root]) * (int)sortDirection > 0) {
                     Swap(root, child);
                     root = child;
                 } else {
