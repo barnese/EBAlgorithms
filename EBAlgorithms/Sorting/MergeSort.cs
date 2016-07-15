@@ -5,9 +5,11 @@ namespace EBAlgorithms {
 
     public class MergeSort<T> where T : IComparable {
         private List<T> list;
+        private T[] sortedSubList;
 
         public MergeSort(List<T> list) {
             this.list = list;
+            this.sortedSubList = new T[list.Count];
         }
 
         public void Sort() {
@@ -28,7 +30,6 @@ namespace EBAlgorithms {
         private void Merge(int leftIndex, int midIndex, int rightIndex) {
             var count = rightIndex - leftIndex + 1;
             var leftEndIndex = midIndex - 1;
-            var sortedSubList = new T[list.Count];
             var sortedListPos = leftIndex;
 
             while (leftIndex <= leftEndIndex && midIndex <= rightIndex) {
