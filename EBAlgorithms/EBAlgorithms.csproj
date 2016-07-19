@@ -40,7 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataStructures\Heap.cs" />
+    <Compile Include="DataStructures\BinarySearchTree.cs" />
     <Compile Include="DataStructures\LinkedList.cs" />
     <Compile Include="DataStructures\Queue.cs" />
     <Compile Include="DocumentDistanceFinder.cs" />

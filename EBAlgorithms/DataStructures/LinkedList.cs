@@ -43,17 +43,19 @@ namespace EBAlgorithms.DataStructures {
             }
         }
 
-        public int Count() {
-            int count = 0;
+        public int Count {
+            get {
+                int count = 0;
 
-            var node = head;
+                var node = head;
 
-            while (node != null) {
-                count++;
-                node = node.next;
+                while (node != null) {
+                    count++;
+                    node = node.next;
+                }
+
+                return count;
             }
-
-            return count;
         }
 
         public void Delete(T value) {

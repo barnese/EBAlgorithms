@@ -56,6 +56,7 @@
     <Compile Include="AlgorithmTests\InsertionSortTests.cs" />
     <Compile Include="AlgorithmTests\MergeSortTests.cs" />
     <Compile Include="AlgorithmTests\HeapSortTests.cs" />
+    <Compile Include="DataStructureTests\BinarySearchTreeTests.cs" />
     <Compile Include="DataStructureTests\LinkedListTests.cs" />
     <Compile Include="DataStructureTests\QueueTests.cs" />
     <Compile Include="Data\TestData.cs" />
