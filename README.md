@@ -10,16 +10,22 @@ Experimental playground for various algorithms and data structures written in .N
 
 ## Building and Running
 
-```cd Source\Console
-dotnet run```
+```Bash
+cd Source\Console
+dotnet run
+```
 
 Runs the console program.
 
-```cd UnitTests
-dotnet test```
+```Bash
+cd UnitTests
+dotnet test
+```
 
 Runs the unit tests.
 
-`dotnet build **/project.json`
+```Bash
+dotnet build **/project.json
+```
 
 This builds all the projects from the root folder.
