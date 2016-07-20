@@ -60,8 +60,11 @@ namespace EBAlgorithms
 
         private string ReadFileContents(string fileName) {
             var file = File.Open(fileName, FileMode.Open);
-            var reader = new StreamReader(file, Encoding.UTF8);
-            return reader.ReadToEnd();
+            string content = "";
+            using (StreamReader reader = new StreamReader(file, Encoding.UTF8)) {
+                content = reader.ReadToEnd();
+            }
+            return content;
         }
 
         private string[] SplitFileIntoWords(string fileName) {

@@ -1,6 +1,7 @@
 {
     "projects": [
-        "Source",
-        "Test"
+        "Source\\EBAlgorithms",
+        "Source\\Console",
+        "UnitTests"
     ]
 }

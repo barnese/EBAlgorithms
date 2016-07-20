@@ -4,8 +4,8 @@ using EBAlgorithms;
 
 namespace EBAlgorithmsUnitTests {
     public class DocumentDistanceFinderTests {
-        private string file1 = "../../Data/DistanceData1.txt";
-        private string file2 = "../../Data/DistanceData2.txt";
+        private string file1 = "Data/DistanceData1.txt";
+        private string file2 = "Data/DistanceData2.txt";
 
         [Fact]
         public void DocumentDistanceFinder_FindDifferingDistance() {
