@@ -10,22 +10,22 @@ Experimental playground for various algorithms and data structures written in .N
 
 ## Building and Running
 
+To run the console program:
+
 ```Bash
 cd Source\Console
 dotnet run
 ```
 
-Runs the console program.
+To run the unit tests:
 
 ```Bash
 cd UnitTests
 dotnet test
 ```
 
-Runs the unit tests.
+To build all the projects from the root folder:
 
 ```Bash
 dotnet build **/project.json
 ```
-
-This builds all the projects from the root folder.

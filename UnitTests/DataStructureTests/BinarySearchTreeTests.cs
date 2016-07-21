@@ -5,15 +5,9 @@ namespace EBAlgorithmsUnitTests {
     
     public class BinarySearchTreeTests {
 
-        private BinarySearchTree<int> tree = new BinarySearchTree<int>();
-        private int[] numbers = { 41, 20, 65, 11, 29, 50, 26 };
+        private static int[] numbers = { 41, 20, 65, 11, 29, 50, 26 };
+        private BinarySearchTree<int> tree = new BinarySearchTree<int>(numbers);
         private int height = 4;
-
-        public BinarySearchTreeTests() {
-            foreach (int number in numbers) {
-                tree.Add(number);
-            }            
-        }
 
         [Fact]
         public void BinarySearchTree_Add() {

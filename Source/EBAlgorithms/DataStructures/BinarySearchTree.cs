@@ -2,36 +2,29 @@
 
 namespace EBAlgorithms.DataStructures {
 
-    public class BinarySearchTreeNode<T> {
+    public class BinarySearchTreeNode<T> where T : IComparable {
         public T key;
         public BinarySearchTreeNode<T> left;
         public BinarySearchTreeNode<T> right;
         public BinarySearchTreeNode<T> parent;
+        public int height;
 
-        public BinarySearchTreeNode(T key, BinarySearchTreeNode<T> left = null, BinarySearchTreeNode<T> right = null) {
+        public BinarySearchTreeNode(T key) {
             this.key = key;
-
-            if (left != null) {
-                this.left = left;
-                this.left.parent = this;
-            }
-
-            if (right != null) {
-                this.right = right;
-                this.right.parent = this;
-            }
         }
     }
 
     public class BinarySearchTree<T> where T : IComparable {
 
-        private BinarySearchTreeNode<T> root = null;
+        public BinarySearchTreeNode<T> root = null;
 
         /// <summary>
         /// Counts the number of nodes in the tree.
         /// </summary>
-        public int Count {
-            get {
+        public int Count
+        {
+            get
+            {
                 return CountNodes(root);
             }
         }
@@ -39,8 +32,10 @@ namespace EBAlgorithms.DataStructures {
         /// <summary>
         /// Determines the height of the tree, which is the number of edges in the longest path from root to leaf node.
         /// </summary>
-        public int Height {
-            get {
+        public int Height
+        {
+            get
+            {
                 return root == null ? 0 : FindHeight(root);
             }
         }
@@ -48,28 +43,48 @@ namespace EBAlgorithms.DataStructures {
         /// <summary>
         /// Gets the minimum key in the three.
         /// </summary>
-        public T MinKey {
-            get {
+        public T MinKey
+        {
+            get
+            {
                 var node = FindMinNode(root);
                 return node != null ? node.key : default(T);
             }
         }
 
         /// <summary>
-        /// Adds a key into the tree.
+        /// Empty constructor
         /// </summary>
-        public void Add(T key) {
-            root = Add(key, root);
+        public BinarySearchTree() { }
+
+        /// <summary>
+        /// Constructor taking an array of keys to add.
+        /// </summary>
+        public BinarySearchTree(T[] keys) {
+            foreach (var key in keys) {
+                Add(key);
+            }
         }
 
-        private BinarySearchTreeNode<T> Add(T key, BinarySearchTreeNode<T> node) {
+        /// <summary>
+        /// Adds a key into the tree.
+        /// </summary>
+        /// <returns>The node added.</returns>
+        public virtual BinarySearchTreeNode<T> Add(T key) {
+            BinarySearchTreeNode<T> addedNode;
+            root = Add(key, root, out addedNode);
+            return addedNode;
+        }
+
+        private BinarySearchTreeNode<T> Add(T key, BinarySearchTreeNode<T> node, out BinarySearchTreeNode<T> addedNode) {
             if (node == null) {
                 node = new BinarySearchTreeNode<T>(key);
+                addedNode = node;
             } else if (key.CompareTo(node.key) <= 0) {
-                node.left = Add(key, node.left);
+                node.left = Add(key, node.left, out addedNode);
                 node.left.parent = node;
             } else {
-                node.right = Add(key, node.right);
+                node.right = Add(key, node.right, out addedNode);
                 node.right.parent = node;
             }
 
@@ -108,21 +123,27 @@ namespace EBAlgorithms.DataStructures {
         /// <summary>
         /// Deletes the node with the given key.
         /// </summary>
-        public void Delete(T key) {
-            root = Delete(key, root);
-        } 
+        /// <returns>The deleted node.</returns>
+        public virtual BinarySearchTreeNode<T> Delete(T key) {
+            BinarySearchTreeNode<T> deletedNode;
+            root = Delete(key, root, out deletedNode);
+            return deletedNode;
+        }
 
-        private BinarySearchTreeNode<T> Delete(T key, BinarySearchTreeNode<T> node = null) {
+        private BinarySearchTreeNode<T> Delete(T key, BinarySearchTreeNode<T> node, out BinarySearchTreeNode<T> deletedNode) {
             if (node == null) {
+                deletedNode = node;
                 return node;
             }
 
             if (key.CompareTo(node.key) < 0) {
-                node.left = Delete(key, node.left);
+                node.left = Delete(key, node.left, out deletedNode);
             } else if (key.CompareTo(node.key) > 0) {
-                node.right = Delete(key, node.right);
+                node.right = Delete(key, node.right, out deletedNode);
             } else {
                 // Found the node with the given key to be deleted.
+                deletedNode = node;
+
                 if (node.left == null) {
                     return node.right;
                 } else if (node.right == null) {
@@ -131,12 +152,12 @@ namespace EBAlgorithms.DataStructures {
 
                 var successor = FindMinNode(node.right);
                 node.key = successor.key;
-                node.right = Delete(node.key, node.right);
+                node.right = Delete(node.key, node.right, out deletedNode);
             }
 
             return node;
         }
-      
+
         /// <summary>
         /// Finds the height (in terms of edges) of the given node.
         /// </summary>
@@ -146,6 +167,31 @@ namespace EBAlgorithms.DataStructures {
             }
 
             return Math.Max(FindHeight(node.left), FindHeight(node.right)) + 1;
+        }
+
+        /// <summary>
+        /// Finds the level of a given node.
+        /// </summary>
+        private int FindLevel(BinarySearchTreeNode<T> node) {
+            return FindLevel(root, node, 1);
+        } 
+
+        private int FindLevel(BinarySearchTreeNode<T> root, BinarySearchTreeNode<T> node, int level) {
+            if (root == null) {
+                return 0;
+            }
+
+            if (root.key.CompareTo(node.key) == 0) {
+                return level;
+            }
+
+            int nextLevel = FindLevel(root.left, node, level + 1);
+            if (nextLevel != 0) {
+                return nextLevel;
+            }
+
+            nextLevel = FindLevel(root.right, node, level + 1);
+            return nextLevel;
         }
 
         private BinarySearchTreeNode<T> FindMinNode(BinarySearchTreeNode<T> node) {
@@ -160,11 +206,11 @@ namespace EBAlgorithms.DataStructures {
         /// Traverses the tree from the root returning a callback for each node.
         /// </summary>
         /// <example>
-        /// tree.TraverseInOrder((k) => {
-        ///     Console.Write("{0} ", k);
+        /// tree.TraverseInOrder((n) => {
+        ///     Console.Write("{0} ", n.key);
         /// });
         /// </example>
-        public void TraverseInOrder(Action<T> callback) {
+        public void TraverseInOrder(Action<BinarySearchTreeNode<T>> callback) {
             // Use a queue to achieve level-order/breadth-first traversal.
             var queue = new Queue<BinarySearchTreeNode<T>>();
             queue.Enqueue(root);
@@ -172,7 +218,7 @@ namespace EBAlgorithms.DataStructures {
             while (!queue.IsEmpty()) {
                 var node = queue.Dequeue();
 
-                callback(node.key);
+                callback(node);
 
                 if (node.left != null) {
                     queue.Enqueue(node.left);

@@ -8,32 +8,28 @@ namespace EBAlgorithmsConsole {
             // var comparer = new CompareSortAlgorithms();
             // comparer.CompareAndPrintOutput();
 
-            int[] numbers = { 50, 40, 70, 60, 80 };
+            int[] numbers = { 41, 20, 65, 11, 29, 50, 26, 23, 55 };
 
-            var tree = new BinarySearchTree<int>();
+            var tree = new AVLTree<int>(numbers);
 
-            foreach (int number in numbers) {
-                tree.Add(number);
-            }
+            //Console.WriteLine(tree.ToString());
 
-            tree.TraverseInOrder((k) => {
-                Console.Write("{0} ", k);
+            tree.TraverseInOrder((n) => {
+                Console.Write("{0} ", n.key);
             });
 
             Console.WriteLine("\nCount = {0}", tree.Count);
-
-            int key = 43;
-            Console.WriteLine("Contains {0}? {1}", key, tree.ContainsKey(key));
             Console.WriteLine("Height = {0}", tree.Height);
             Console.WriteLine("Min key = {0}", tree.MinKey);
+            Console.WriteLine("Contains {0}? {1}", numbers[0], tree.ContainsKey(numbers[0]));
 
-            tree.Delete(70);
+            //tree.Delete(70);
 
-            tree.TraverseInOrder((k) => {
-                Console.Write("{0} ", k);
-            });
+            //tree.TraverseInOrder((k) => {
+            //    Console.Write("{0} ", k);
+            //});
 
-            Console.WriteLine();
+            //Console.WriteLine();
         }
     }
 }
