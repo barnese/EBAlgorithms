@@ -1,11 +1,12 @@
 ﻿using Xunit;
 using EBAlgorithms.DataStructures;
+using System.Collections.Generic;
 
 namespace EBAlgorithmsUnitTests {
     
     public class BinarySearchTreeTests {
 
-        private static int[] numbers = { 41, 20, 65, 11, 29, 50, 26 };
+        private static int[] numbers = { 6, 2, 7, 1, 4, 9, 3, 5, 8 };
         private BinarySearchTree<int> tree = new BinarySearchTree<int>(numbers);
         private int height = 4;
 
@@ -31,6 +32,46 @@ namespace EBAlgorithmsUnitTests {
         [Fact]
         public void BinarySearchTree_Height() {
             Assert.Equal(tree.Height, height);
+        }
+
+        [Fact] 
+        public void BinarySearchTree_LevelOrderTraversal() {
+            var expected = new List<int> { 6, 2, 7, 1, 4, 9, 3, 5, 8 };
+
+            var i = 0;
+            tree.TraverseLevelOrder((node) => {
+                Assert.Equal(node.key, expected[i++]);
+            });
+        }
+
+        [Fact] 
+        public void BinarySearchTree_InOrderTraversal() {
+            var expected = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+
+            var i = 0;
+            tree.TraverseInOrder((node) => {
+                Assert.Equal(node.key, expected[i++]);
+            });
+        }
+
+        [Fact]
+        public void BinarySearchTree_PreOrderTraversal() {
+            var expected = new List<int> { 6, 2, 1, 4, 3, 5, 7, 9, 8 };
+
+           var i = 0;
+            tree.TraversePreOrder((node) => {
+                Assert.Equal(node.key, expected[i++]);
+            });
+        }
+
+        [Fact]
+        public void BinarySearchTree_PostOrderTraversal() {
+            var expected = new List<int> { 1, 3, 5, 4, 2, 8, 9, 7, 6 };
+
+            var i = 0;
+            tree.TraversePostOrder((node) => {
+                Assert.Equal(node.key, expected[i++]);
+            });
         }
     }
 }

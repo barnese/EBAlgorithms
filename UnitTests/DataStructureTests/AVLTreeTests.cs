@@ -19,7 +19,7 @@ namespace EBAlgorithmsUnitTests {
 
             int[] result = new int[expected.Length];
             int i = 0;
-            tree.TraverseInOrder((node) => {
+            tree.TraverseLevelOrder((node) => {
                 result[i++] = node.key;
             });
 
@@ -102,7 +102,7 @@ namespace EBAlgorithmsUnitTests {
 
             char[] result = new char[expected.Length];
             int i = 0;
-            tree.TraverseInOrder((node) => {
+            tree.TraverseLevelOrder((node) => {
                 result[i++] = node.key;
             });
 
@@ -121,7 +121,7 @@ namespace EBAlgorithmsUnitTests {
 
             char[] result = new char[expected.Length];
             int i = 0;
-            tree.TraverseInOrder((node) => {
+            tree.TraverseLevelOrder((node) => {
                 result[i++] = node.key;
             });
 
@@ -140,7 +140,7 @@ namespace EBAlgorithmsUnitTests {
 
             char[] result = new char[expected.Length];
             int i = 0;
-            tree.TraverseInOrder((node) => {
+            tree.TraverseLevelOrder((node) => {
                 result[i++] = node.key;
             });
 
@@ -159,7 +159,7 @@ namespace EBAlgorithmsUnitTests {
 
             char[] result = new char[expected.Length];
             int i = 0;
-            tree.TraverseInOrder((node) => {
+            tree.TraverseLevelOrder((node) => {
                 result[i++] = node.key;
             });
 

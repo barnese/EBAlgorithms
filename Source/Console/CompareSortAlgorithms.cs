@@ -7,36 +7,45 @@ namespace EBAlgorithmsConsole {
 
         public void CompareAndPrintOutput() {
             var numberOfValues = 10000;
-            var originalList = GetRandomIntList(numberOfValues, -10000, 10000);
-
-            var list = CopyOriginalList(originalList);
+            var list = GetRandomIntList(numberOfValues, 0, numberOfValues, true);
 
             Console.WriteLine("Sort list contains {0} values.", numberOfValues);
 
+            RunTest("Insert Sort", list);
+            RunTest("Merge Sort", list);
+            RunTest("Heap Sort", list);
+            RunTest("AVL Sort", list);
+        }
+         
+        private void RunTest(string algorithm, List<int> list) {
+            var listCopy = CopyOriginalList(list);
+
             var watch = System.Diagnostics.Stopwatch.StartNew();
 
-            list.InsertionSort();
+            switch (algorithm) {
+                case "Insert Sort":
+                    listCopy.InsertionSort();
+                    break;
+                case "Merge Sort":
+                    listCopy.MergeSort();
+                    break;
+                case "Heap Sort":
+                    listCopy.HeapSort();
+                    break;
+                case "AVL Sort":
+                    listCopy.AVLSort();
+                    break;
+                default:
+                    break;
+            }
 
             watch.Stop();
-            Console.WriteLine("Insertion sort runtime: {0} ms", watch.ElapsedMilliseconds);
 
-            watch.Reset();
-            list = CopyOriginalList(originalList);
-            watch.Start();
+            if (!listCopy.IsSorted()) {
+                Console.WriteLine("{0} is not sorted!", algorithm);
+            }
 
-            list.MergeSort();
-
-            watch.Stop();
-            Console.WriteLine("Merge sort runtime: {0} ms", watch.ElapsedMilliseconds);
-
-            watch.Reset();
-            list = CopyOriginalList(originalList);
-            watch.Start();
-
-            list.HeapSort();
-
-            watch.Stop();
-            Console.WriteLine("Heap sort runtime: {0} ms", watch.ElapsedMilliseconds);
+            Console.WriteLine("{0} runtime: {1} ms", algorithm, watch.ElapsedMilliseconds);
         }
 
         private List<int> CopyOriginalList(List<int> originalList) {
@@ -45,12 +54,17 @@ namespace EBAlgorithmsConsole {
             return list;
         }
 
-        private List<int> GetRandomIntList(int size, int minValue, int maxValue) {
+        private List<int> GetRandomIntList(int size, int minValue, int maxValue, bool uniqueValues) {
             var list = new List<int>(size);
             var random = new Random(DateTime.Now.Millisecond);
 
             for (var i = 0; i < size; i++) {
-                list.Add(random.Next(minValue, maxValue));
+                int randomInt;
+                do {
+                    randomInt = random.Next(minValue, maxValue);
+                } while (uniqueValues && list.Contains(randomInt));
+
+                list.Add(randomInt);
             }
 
             return list;

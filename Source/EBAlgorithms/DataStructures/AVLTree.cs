@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace EBAlgorithms.DataStructures {
 
     public class AVLTree<T> : BinarySearchTree<T> where T : IComparable {
 
-        public AVLTree(T[] keys) {
+        public AVLTree() { }
+
+        public AVLTree(IEnumerable<T> keys) {
             foreach (var key in keys) {
                 Add(key);
             }

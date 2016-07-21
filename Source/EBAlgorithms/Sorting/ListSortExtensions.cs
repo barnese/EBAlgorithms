@@ -6,6 +6,14 @@ namespace EBAlgorithms {
     public static class ListSortExtensions {
 
         /// <summary>
+        /// Sorts the current list using AVL Sort. Note: only use when list contains unique values!
+        /// </summary>
+        public static void AVLSort<T>(this List<T> list) where T : IComparable {
+            var avlSort = new AVLSort<T>(list);
+            avlSort.Sort();
+        }
+
+        /// <summary>
         /// Sorts the current list using Heap Sort.
         /// </summary>
         public static void HeapSort<T>(this List<T> list, SortDirection sortDirection = SortDirection.Ascending) where T : IComparable {

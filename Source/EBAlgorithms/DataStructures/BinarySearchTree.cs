@@ -203,14 +203,14 @@ namespace EBAlgorithms.DataStructures {
         }
 
         /// <summary>
-        /// Traverses the tree from the root returning a callback for each node.
+        /// Traverses the tree from the root in level-order/breadth-first. A callback is invoked on each node visit.
         /// </summary>
         /// <example>
-        /// tree.TraverseInOrder((n) => {
+        /// tree.TraverseLevelOrder((n) => {
         ///     Console.Write("{0} ", n.key);
         /// });
         /// </example>
-        public void TraverseInOrder(Action<BinarySearchTreeNode<T>> callback) {
+        public void TraverseLevelOrder(Action<BinarySearchTreeNode<T>> callback) {
             // Use a queue to achieve level-order/breadth-first traversal.
             var queue = new Queue<BinarySearchTreeNode<T>>();
             queue.Enqueue(root);
@@ -228,6 +228,48 @@ namespace EBAlgorithms.DataStructures {
                     queue.Enqueue(node.right);
                 }
             }
+        }
+
+        /// <summary>
+        /// Traverses the tree from the root in-order/depth-first. A callback is invoked on each node visit.
+        /// </summary>
+        public void TraverseInOrder(Action<BinarySearchTreeNode<T>> callback) {
+            TraverseInOrder(callback, root);
+        }
+
+        private void TraverseInOrder(Action<BinarySearchTreeNode<T>> callback, BinarySearchTreeNode<T> node) {
+            if (node == null) return;
+            TraverseInOrder(callback, node.left);
+            callback(node);
+            TraverseInOrder(callback, node.right);
+        }
+
+        /// <summary>
+        /// Traverses the tree from the root post-order/depth-first. A callback is invoked on each node visit.
+        /// </summary>
+        public void TraversePostOrder(Action<BinarySearchTreeNode<T>> callback) {
+            TraversePostOrder(callback, root);
+        }
+
+        private void TraversePostOrder(Action<BinarySearchTreeNode<T>> callback, BinarySearchTreeNode<T> node) {
+            if (node == null) return;
+            TraversePostOrder(callback, node.left);
+            TraversePostOrder(callback, node.right);
+            callback(node);
+        }
+
+        /// <summary>
+        /// Traverses the tree from the root pre-order/depth-first. A callback is invoked on each node visit.
+        /// </summary>
+        public void TraversePreOrder(Action<BinarySearchTreeNode<T>> callback) {
+            TraversePreOrder(callback, root);
+        }
+
+        private void TraversePreOrder(Action<BinarySearchTreeNode<T>> callback, BinarySearchTreeNode<T> node) {
+            if (node == null) return;
+            callback(node);
+            TraversePreOrder(callback, node.left);
+            TraversePreOrder(callback, node.right);
         }
     }
 }
