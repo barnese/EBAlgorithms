@@ -14,10 +14,13 @@ namespace EBAlgorithms {
         public void Sort() {
             var tree = new AVLTree<T>(list);
 
-            list.Clear();
-            tree.TraverseInOrder((node) => {
-                list.Add(node.key);
-            });
+            // Only perform the sort if the tree is a BST.
+            if (tree.IsBinarySearchTree) {
+                list.Clear();
+                tree.TraverseInOrder((node) => {
+                    list.Add(node.key);
+                });
+            }
         }
     }
 }

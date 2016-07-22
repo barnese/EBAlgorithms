@@ -21,10 +21,8 @@ namespace EBAlgorithms.DataStructures {
         /// <summary>
         /// Counts the number of nodes in the tree.
         /// </summary>
-        public int Count
-        {
-            get
-            {
+        public int Count {
+            get {
                 return CountNodes(root);
             }
         }
@@ -32,12 +30,20 @@ namespace EBAlgorithms.DataStructures {
         /// <summary>
         /// Determines the height of the tree, which is the number of edges in the longest path from root to leaf node.
         /// </summary>
-        public int Height
-        {
-            get
-            {
+        public int Height {
+            get {
                 return root == null ? 0 : FindHeight(root);
             }
+        }
+
+        /// <summary>
+        /// Determines if the tree is a Binary Search Tree, i.e., that the nodes adhere to the properties of a BST.
+        /// </summary>
+        /// <returns></returns>
+        public bool IsBinarySearchTree {
+            get {
+                return IsBST(root, null);
+            }            
         }
 
         /// <summary>
@@ -200,6 +206,24 @@ namespace EBAlgorithms.DataStructures {
             }
 
             return node;
+        }
+
+        private bool IsBST(BinarySearchTreeNode<T> node, BinarySearchTreeNode<T> prevNode) {
+            if (node != null) {
+                if (!IsBST(node.left, prevNode)) {
+                    return false;
+                }
+
+                if (prevNode != null && node.key.CompareTo(prevNode.key) <= 0) {
+                    return false;
+                }
+
+                prevNode = node;
+
+                return IsBST(node.right, prevNode);
+            }
+
+            return true;
         }
 
         /// <summary>
