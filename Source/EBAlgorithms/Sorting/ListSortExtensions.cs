@@ -14,6 +14,14 @@ namespace EBAlgorithms {
         }
 
         /// <summary>
+        /// Sorts the current list using Counting Sort.
+        /// </summary>
+        public static void CountingSort<T>(this List<T> list) {
+            var countingSort = new CountingSort<T>(list);
+            countingSort.Sort();
+        }
+
+        /// <summary>
         /// Sorts the current list using Heap Sort.
         /// </summary>
         public static void HeapSort<T>(this List<T> list, SortDirection sortDirection = SortDirection.Ascending) where T : IComparable {

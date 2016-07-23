@@ -7,7 +7,7 @@ namespace EBAlgorithmsConsole {
     public class Program {
         public static void Main(string[] args) {
             var comparer = new CompareSortAlgorithms();
-            comparer.CompareAndPrintOutput();           
+            comparer.CompareAndPrintOutput();
         }
     }
 }

@@ -9,12 +9,13 @@ namespace EBAlgorithmsConsole {
             var numberOfValues = 10000;
             var list = GetRandomIntList(numberOfValues, 0, numberOfValues, true);
 
-            Console.WriteLine("Sort list contains {0} values.", numberOfValues);
+            Console.WriteLine("Sort list contains {0} random integers.", numberOfValues);
 
+            RunTest("AVL Sort", list);
+            RunTest("Counting Sort", list);
+            RunTest("Heap Sort", list);
             RunTest("Insert Sort", list);
             RunTest("Merge Sort", list);
-            RunTest("Heap Sort", list);
-            RunTest("AVL Sort", list);
         }
          
         private void RunTest(string algorithm, List<int> list) {
@@ -34,6 +35,9 @@ namespace EBAlgorithmsConsole {
                     break;
                 case "AVL Sort":
                     listCopy.AVLSort();
+                    break;
+                case "Counting Sort":
+                    listCopy.CountingSort();
                     break;
                 default:
                     break;
