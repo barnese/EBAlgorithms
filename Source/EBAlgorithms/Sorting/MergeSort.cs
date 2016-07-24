@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 
 namespace EBAlgorithms {
-
     public class MergeSort<T> where T : IComparable {
         private List<T> list;
         private T[] sortedSubList;

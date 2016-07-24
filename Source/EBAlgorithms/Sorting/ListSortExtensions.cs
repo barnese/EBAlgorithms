@@ -38,6 +38,14 @@ namespace EBAlgorithms {
         }
 
         /// <summary>
+        /// Sorts the current list using Quick Sort.
+        /// </summary>
+        public static void QuickSort<T>(this List<T> list) where T : IComparable {
+            var quickSort = new QuickSort<T>(list);
+            quickSort.Sort();
+        }
+
+        /// <summary>
         /// Determines if the list is sorted.
         /// </summary>
         public static bool IsSorted<T>(this List<T> list, SortDirection direction = SortDirection.Ascending) where T : IComparable {

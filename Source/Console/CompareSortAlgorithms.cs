@@ -7,7 +7,7 @@ namespace EBAlgorithmsConsole {
 
         public void CompareAndPrintOutput() {
             var numberOfValues = 10000;
-            var list = GetRandomIntList(numberOfValues, 0, numberOfValues, true);
+            var list = GetRandomIntList(numberOfValues, 0, numberOfValues);
 
             Console.WriteLine("Sort list contains {0} random integers.", numberOfValues);
 
@@ -16,28 +16,32 @@ namespace EBAlgorithmsConsole {
             RunTest("Heap Sort", list);
             RunTest("Insert Sort", list);
             RunTest("Merge Sort", list);
+            RunTest("Quick Sort", list);
         }
-         
+
         private void RunTest(string algorithm, List<int> list) {
             var listCopy = CopyOriginalList(list);
 
             var watch = System.Diagnostics.Stopwatch.StartNew();
 
             switch (algorithm) {
+                case "AVL Sort":
+                    listCopy.AVLSort();
+                    break;
+                case "Counting Sort":
+                    listCopy.CountingSort();
+                    break;
+                case "Heap Sort":
+                    listCopy.HeapSort();
+                    break;
                 case "Insert Sort":
                     listCopy.InsertionSort();
                     break;
                 case "Merge Sort":
                     listCopy.MergeSort();
                     break;
-                case "Heap Sort":
-                    listCopy.HeapSort();
-                    break;
-                case "AVL Sort":
-                    listCopy.AVLSort();
-                    break;
-                case "Counting Sort":
-                    listCopy.CountingSort();
+                case "Quick Sort":
+                    listCopy.QuickSort();
                     break;
                 default:
                     break;
@@ -58,21 +62,29 @@ namespace EBAlgorithmsConsole {
             return list;
         }
 
-        private List<int> GetRandomIntList(int size, int minValue, int maxValue, bool uniqueValues) {
+        private List<int> GetRandomIntList(int size, int minValue, int maxValue) {
             var list = new List<int>(size);
             var random = new Random(DateTime.Now.Millisecond);
 
-            for (var i = 0; i < size; i++) {
-                int randomInt;
-                do {
-                    randomInt = random.Next(minValue, maxValue);
-                } while (uniqueValues && list.Contains(randomInt));
+            int step = (int)Math.Ceiling((double)(maxValue - minValue) / size);
 
-                list.Add(randomInt);
+            for (var i = 0; i < size; i++) {
+                list.Add(i * step);
+            }
+
+            // Randomly swap values.
+            for (var i = 0; i < size; i++) {
+                var randomIndex = random.Next(0, size);
+                Swap(list, i, randomIndex);
             }
 
             return list;
         }
 
+        private void Swap(List<int> list, int i, int j) {
+            int temp = list[i];
+            list[i] = list[j];
+            list[j] = temp;
+        }    
     }
 }
