@@ -31,32 +31,27 @@ namespace EBAlgorithms {
     }
 
     public class CountingSortInt {
-        private List<int> list;
-        private int maxNumberOfValues = 256;
-
-        public CountingSortInt(List<int> list, int maxNumberOfValues) {
-            this.list = list;
-            this.maxNumberOfValues = maxNumberOfValues;
-        }
-
-        public void Sort() {
-            var countingArray = new int[maxNumberOfValues];
+        public static void Sort(List<int> list, int significantDigit) {
+            var output = new int[list.Count];
+            var counts = new int[10];
 
             for (var i = 0; i < list.Count; i++) {
-                if (list[i] >= maxNumberOfValues) {
-                    throw new Exception("A value in the list exceeded the maximum allowed values. Increase maxNumberOfValues.");
-                }
-
-                countingArray[list[i]] = countingArray[list[i]] + 1;
+                int digit = (list[i] / significantDigit) % 10;
+                counts[digit]++;
             }
 
-            var index = 0;
-            for (var i = 0; i < countingArray.Length; i++) {
-                if (countingArray[i] > 0) {
-                    for (var j = 0; j < countingArray[i]; j++) {
-                        list[index++] = i;
-                    }
-                }
+            for (var i = 1; i < 10; i++) {
+                counts[i] += counts[i - 1];
+            }
+
+            for (var i = list.Count - 1; i >= 0; i--) {
+                int digit = (list[i] / significantDigit) % 10;
+                output[counts[digit] - 1] = list[i];
+                counts[digit]--;
+            }
+
+            for (var i = 0; i < list.Count; i++) {
+                list[i] = output[i];
             }
         }
     }
