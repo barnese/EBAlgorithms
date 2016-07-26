@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace EBAlgorithms.DataStructures {
 
@@ -12,7 +14,7 @@ namespace EBAlgorithms.DataStructures {
         }
     }
 
-    public class LinkedList<T> {
+    public class LinkedList<T> : IEnumerable<T> {
         private LinkedListNode<T> head;
 
         private LinkedListNode<T> lastNode
@@ -137,6 +139,19 @@ namespace EBAlgorithms.DataStructures {
 
                 prev.next = newNode;
             }
+        }
+
+        public IEnumerator<T> GetEnumerator() {
+            var node = head;
+
+            while (node != null) {
+                yield return node.value;
+                node = node.next;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() {
+            return GetEnumerator();
         }
     }
 }

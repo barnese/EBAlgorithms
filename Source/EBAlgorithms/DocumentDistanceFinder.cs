@@ -13,8 +13,8 @@ namespace EBAlgorithms
         /// </summary>
         /// <returns>Distance as a decimal ranging from 0 to pi/2.</returns>
         public double FindDistance(string fileName1, string fileName2) {
-            var words1 = SplitFileIntoWords(fileName1);
-            var words2 = SplitFileIntoWords(fileName2);
+            var words1 = FileHelpers.SplitFileIntoWords(fileName1);
+            var words2 = FileHelpers.SplitFileIntoWords(fileName2);
 
             var wordFrequencies1 = CountWordFrequencies(words1);
             var wordFrequencies2 = CountWordFrequencies(words2);
@@ -56,30 +56,6 @@ namespace EBAlgorithms
             }
 
             return wordFrequencies;
-        }
-
-        private string ReadFileContents(string fileName) {
-            var file = File.Open(fileName, FileMode.Open);
-            string content = "";
-            using (StreamReader reader = new StreamReader(file, Encoding.UTF8)) {
-                content = reader.ReadToEnd();
-            }
-            return content;
-        }
-
-        private string[] SplitFileIntoWords(string fileName) {
-            var fileContents = ReadFileContents(fileName);
-
-            // Convert non-alphanumeric characters into spaces.
-            var characters = fileContents.ToCharArray();
-
-            for (int i = 0; i < characters.Length; i++) {
-                if (!Char.IsLetterOrDigit(characters[i])) {
-                    characters[i] = ' ';
-                }
-            }
-
-            return new String(characters).Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
         }
     }
 }
