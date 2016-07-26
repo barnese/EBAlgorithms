@@ -9,7 +9,8 @@ using System.Linq;
 namespace EBAlgorithmsConsole {
     public class Program {
         public static void Main(string[] args) {
-            HashMapTests();
+            CompareSortAlgorithms();
+            //HashMapTests();
         }
         
         public static void CompareSortAlgorithms() {

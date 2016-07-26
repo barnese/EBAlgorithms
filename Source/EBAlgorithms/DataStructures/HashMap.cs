@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace EBAlgorithms.DataStructures { 
     public enum HashFunction {
@@ -22,10 +20,30 @@ namespace EBAlgorithms.DataStructures {
     }
 
     public class HashMap<K, V> : IEnumerable<HashEntry<K, V>> where K : IComparable {
+
+        #region Properties
         private int size = 255;
         private LinkedList<HashEntry<K, V>>[] table;
         private HashFunction hashFunction;
 
+        public int Count
+        {
+            get
+            {
+                var count = 0;
+
+                foreach (var list in table) {
+                    if (list != null) {
+                        count += list.Count;
+                    }
+                }
+
+                return count;
+            }
+        }
+        #endregion
+
+        #region Constructors
         public HashMap() {
             CommonInit();
         }
@@ -44,7 +62,39 @@ namespace EBAlgorithms.DataStructures {
         private void CommonInit() {
             table = new LinkedList<HashEntry<K, V>>[size];
         }
+        #endregion
 
+        #region Indexers and Enumerators
+
+        // Defines an indexer which allows client code to use [] notation for the get and put operations.
+        public V this[K key]
+        {
+            get
+            {
+                return Get(key);
+            }
+            set
+            {
+                Put(key, value);
+            }
+        }
+
+        public IEnumerator<HashEntry<K, V>> GetEnumerator() {
+            for (var i = 0; i < table.Length; i++) {
+                if (table[i] != null) {
+                    foreach (var item in table[i]) {
+                        yield return item;
+                    }
+                }
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() {
+            return GetEnumerator();
+        }
+        #endregion
+
+        #region Operations
         public bool ContainsKey(K key) {
             int hash = GetHashCode(key);
             var containsKey = false;
@@ -61,17 +111,15 @@ namespace EBAlgorithms.DataStructures {
             return containsKey;
         }
 
-        public int Count {
-            get {
-                var count = 0;
+        public void Delete(K key) {
+            int hash = GetHashCode(key);
 
-                foreach (var list in table) {
-                    if (list != null) {
-                        count += list.Count;
+            if (table[hash] != null) {
+                foreach (var item in table[hash]) {
+                    if (item.Key.CompareTo(key) == 0) {
+                        table[hash].Delete(item);
                     }
                 }
-
-                return count;
             }
         }
 
@@ -136,28 +184,6 @@ namespace EBAlgorithms.DataStructures {
             }
         }
 
-        // Defines an indexer which allows client code to use [] notation for the get and put operations.
-        public V this[K key] {
-            get {
-                return Get(key);
-            }
-            set {
-                Put(key, value);
-            }
-        }
-
-        public IEnumerator<HashEntry<K, V>> GetEnumerator() {
-            for (var i = 0; i < table.Length; i++) {
-                if (table[i] != null) {
-                    foreach (var item in table[i]) {
-                        yield return item;
-                    }
-                }
-            }
-        }
-
-        IEnumerator IEnumerable.GetEnumerator() {
-            return GetEnumerator();
-        }
+        #endregion
     }
 }
