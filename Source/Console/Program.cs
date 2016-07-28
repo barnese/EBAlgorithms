@@ -9,8 +9,8 @@ using System.Linq;
 namespace EBAlgorithmsConsole {
     public class Program {
         public static void Main(string[] args) {
-            CompareSortAlgorithms();
-            //HashMapTests();
+            //CompareSortAlgorithms();
+            HashMapTests();
         }
         
         public static void CompareSortAlgorithms() {
@@ -23,8 +23,7 @@ namespace EBAlgorithmsConsole {
 
             var words = FileHelpers.SplitFileIntoWords("LoremIpsum.txt");
 
-            var size = 131071; // 2^17-1 prime
-            var hashmap = new HashMap<string, int>(size, HashFunction.Universal);
+            var hashmap = new HashMap<string, int>(words.Length);
 
             foreach (var word in words) {
                 var w = word.ToLower();             
@@ -35,19 +34,9 @@ namespace EBAlgorithmsConsole {
                 }
             }
 
-            var hashCodes = new List<int>();
-
-            foreach (var entry in hashmap) {
-                var hashCode = hashmap.GetHashCode(entry.Key);
-
-                if (!hashCodes.Contains(hashmap.GetHashCode(entry.Key))) {
-                    hashCodes.Add(hashCode);
-                }
-            }
-
-            Console.WriteLine("\nWord count = {0}", words.Length);
-            Console.WriteLine("Unique word count = {0}", hashmap.Count);
-            Console.WriteLine("Unique hash codes = {0}", hashCodes.Count);
+            Console.WriteLine();
+            Console.WriteLine("Total words  = {0}", words.Length);
+            Console.WriteLine("Unique words = {0}", hashmap.Count);
         }
     }
 }

@@ -22,14 +22,14 @@ namespace EBAlgorithms.DataStructures {
     public class HashMap<K, V> : IEnumerable<HashEntry<K, V>> where K : IComparable {
 
         #region Properties
-        private int size = 255;
+        private const int baseSize = 251;
+        private int size = baseSize;
+        private bool userSizePreferred = false;
         private LinkedList<HashEntry<K, V>>[] table;
         private HashFunction hashFunction;
 
-        public int Count
-        {
-            get
-            {
+        public int Count {
+            get {
                 var count = 0;
 
                 foreach (var list in table) {
@@ -41,6 +41,7 @@ namespace EBAlgorithms.DataStructures {
                 return count;
             }
         }
+
         #endregion
 
         #region Constructors
@@ -55,6 +56,12 @@ namespace EBAlgorithms.DataStructures {
 
         public HashMap(int size, HashFunction hashFunction = HashFunction.Division) {
             this.size = size;
+
+            userSizePreferred = true;
+
+            // Adjust the size of the table so that it is a prime for better hashing.
+            size = MathHelpers.FindClosestPrime(size);
+
             this.hashFunction = hashFunction;
             CommonInit();
         }
@@ -97,18 +104,16 @@ namespace EBAlgorithms.DataStructures {
         #region Operations
         public bool ContainsKey(K key) {
             int hash = GetHashCode(key);
-            var containsKey = false;
 
             if (table[hash] != null) {
                 foreach (var item in table[hash]) {
                     if (item.Key.CompareTo(key) == 0) {
-                        containsKey = true;
-                        break;
+                        return true;
                     }
                 }
             }
 
-            return containsKey;
+            return false;
         }
 
         public void Delete(K key) {
@@ -118,8 +123,11 @@ namespace EBAlgorithms.DataStructures {
                 foreach (var item in table[hash]) {
                     if (item.Key.CompareTo(key) == 0) {
                         table[hash].Delete(item);
+                        break;
                     }
                 }
+
+                ResizeTableIfNecessary();
             }
         }
 
@@ -140,22 +148,24 @@ namespace EBAlgorithms.DataStructures {
         public int GetHashCode(K key) {
             int hash;
             var k = key.GetHashCode();
-            var m = size;
 
             switch (hashFunction) {
-                case HashFunction.Division:
-                    hash = k % m;
+                case HashFunction.Division: {
+                    hash = k % size;
                     break;
+                }
                 case HashFunction.Multiplication: {
+                    // TODO: Verify correctness.
                     var a = 0.6180339887;
-                    hash = (int)Math.Floor(m * (k * a % 1));
+                    hash = (int)Math.Floor(size * (k * a % 1));
                     break;
                 }
                 default: { // Universal
+                    // TODO: Verify correctness.
                     var p = Math.Pow(2, 31) - 1; // a Mersenne prime number > size of universe of keys.
                     var a = 14348907; // Randomly chosen from 0, ..., p-1
                     var b = 243; // Randomly chosen from 0, ..., p-1
-                    hash = (int)((a * k + b) % p) % m;
+                    hash = (int)((a * k + b) % p) % size;
                     break;
                 }
             }
@@ -164,6 +174,10 @@ namespace EBAlgorithms.DataStructures {
         }
 
         public void Put(K key, V value) {
+            Put(table, key, value, true);
+        }
+
+        private void Put(LinkedList<HashEntry<K, V>>[] table, K key, V value, bool resizeTableIfNecessary) {
             int hash = GetHashCode(key);
             var found = false;
 
@@ -181,7 +195,40 @@ namespace EBAlgorithms.DataStructures {
 
             if (!found) {
                 table[hash].Add(new HashEntry<K, V>(key, value));
+
+                if (resizeTableIfNecessary) {
+                    ResizeTableIfNecessary();
+                }
             }
+        }
+
+        private void ResizeTableIfNecessary() {
+            var itemCount = Count;
+
+            if (itemCount >= table.Length) {
+                // Double the table size.
+                AdjustTableSize(2);
+            } else if (!userSizePreferred && itemCount > baseSize && itemCount <= table.Length / 4) {
+                // Halve the table size.
+                AdjustTableSize(0.5);
+            }
+        }
+
+        private void AdjustTableSize(double adjustmentFactor) {
+            // Adjust table size by adjustment factor then find closest prime for better hashing.
+            size = MathHelpers.FindClosestPrime((int)Math.Floor(size * adjustmentFactor));
+
+            var newTable = new LinkedList<HashEntry<K, V>>[size];
+
+            foreach (var list in table) {
+                if (list != null) {
+                    foreach (var item in list) {
+                        Put(newTable, item.Key, item.Value ,false);
+                    }
+                }
+            }
+
+            table = newTable;
         }
 
         #endregion
