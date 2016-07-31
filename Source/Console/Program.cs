@@ -9,10 +9,10 @@ using System.Linq;
 namespace EBAlgorithmsConsole {
     public class Program {
         public static void Main(string[] args) {
-            //CompareSortAlgorithms();
-            HashMapTests();
+            CompareSortAlgorithms();
+            //HashMapTests();
         }
-        
+
         public static void CompareSortAlgorithms() {
             var comparer = new CompareSortAlgorithms();
             comparer.CompareAndPrintOutput();

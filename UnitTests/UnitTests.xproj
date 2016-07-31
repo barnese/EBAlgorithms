@@ -17,5 +17,26 @@
   <ItemGroup>
     <Service Include="{82a7f48d-3b50-4b1e-b82e-3ada8210c358}" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Data\DistanceData1.txt" />
+    <Content Include="Data\DistanceData2.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DataStructureTests\AVLTreeTests.cs" />
+    <Compile Include="DataStructureTests\BinarySearchTreeTests.cs" />
+    <Compile Include="DataStructureTests\HashMapTests.cs" />
+    <Compile Include="DataStructureTests\LinkedListTests.cs" />
+    <Compile Include="DataStructureTests\QueueTests.cs" />
+    <Compile Include="Data\TestData.cs" />
+    <Compile Include="GeneralTests\DocumentDistanceFinderTests.cs" />
+    <Compile Include="SortingTests\AVLSortTests.cs" />
+    <Compile Include="SortingTests\CountingSortTests.cs" />
+    <Compile Include="SortingTests\HeapSortTests.cs" />
+    <Compile Include="SortingTests\InsertionSortTests.cs" />
+    <Compile Include="SortingTests\MergeSortTests.cs" />
+    <Compile Include="SortingTests\QuickSortTests.cs" />
+    <Compile Include="SortingTests\RadixSortTests.cs" />
+    <Compile Include="StringTests\KarpRabinTests.cs" />
+  </ItemGroup>
   <Import Project="$(VSToolsPath)\DotNet\Microsoft.DotNet.targets" Condition="'$(VSToolsPath)' != ''" />
 </Project>
