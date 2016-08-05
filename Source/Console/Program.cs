@@ -9,8 +9,19 @@ using System.Linq;
 namespace EBAlgorithmsConsole {
     public class Program {
         public static void Main(string[] args) {
-            CompareSortAlgorithms();
+            //CompareSortAlgorithms();
             //HashMapTests();
+
+            var hashmap = new HashMapOpenAddressing<string, int>();
+            hashmap.Put("one", 1);
+            hashmap.Put("two", 2);
+            hashmap.Put("three", 3);
+
+            Console.WriteLine("Count = {0}", hashmap.Count);
+            Console.WriteLine("two = {0}", hashmap["two"]);
+
+            hashmap.Delete("one");
+            Console.WriteLine("Deleted one. Count = {0}", hashmap.Count);
         }
 
         public static void CompareSortAlgorithms() {

@@ -9,16 +9,6 @@ namespace EBAlgorithms.DataStructures {
         Universal
     }
 
-    public class HashEntry<K, V> where K : IComparable {
-        public K Key;
-        public V Value;
-
-        public HashEntry(K key, V value) {
-            this.Key = key;
-            this.Value = value;
-        }
-    }
-
     public class HashMap<K, V> : IEnumerable<HashEntry<K, V>> where K : IComparable {
 
         #region Properties

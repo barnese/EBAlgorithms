@@ -24,6 +24,7 @@
   <ItemGroup>
     <Compile Include="DataStructureTests\AVLTreeTests.cs" />
     <Compile Include="DataStructureTests\BinarySearchTreeTests.cs" />
+    <Compile Include="DataStructureTests\HashMapOpenAddressingTests.cs" />
     <Compile Include="DataStructureTests\HashMapTests.cs" />
     <Compile Include="DataStructureTests\LinkedListTests.cs" />
     <Compile Include="DataStructureTests\QueueTests.cs" />
