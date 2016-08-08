@@ -22,6 +22,7 @@
     <Compile Include="DataStructures\Hashing\HashMapOpenAddressing.cs" />
     <Compile Include="DataStructures\LinkedList.cs" />
     <Compile Include="DataStructures\Queue.cs" />
+    <Compile Include="General\CatalanNumbers.cs" />
     <Compile Include="General\DocumentDistanceFinder.cs" />
     <Compile Include="Helpers\FileHelpers.cs" />
     <Compile Include="Helpers\MathHelpers.cs" />

@@ -12,16 +12,7 @@ namespace EBAlgorithmsConsole {
             //CompareSortAlgorithms();
             //HashMapTests();
 
-            var hashmap = new HashMapOpenAddressing<string, int>();
-            hashmap.Put("one", 1);
-            hashmap.Put("two", 2);
-            hashmap.Put("three", 3);
-
-            Console.WriteLine("Count = {0}", hashmap.Count);
-            Console.WriteLine("two = {0}", hashmap["two"]);
-
-            hashmap.Delete("one");
-            Console.WriteLine("Deleted one. Count = {0}", hashmap.Count);
+            CatalanNumbersTest();
         }
 
         public static void CompareSortAlgorithms() {
@@ -48,6 +39,14 @@ namespace EBAlgorithmsConsole {
             Console.WriteLine();
             Console.WriteLine("Total words  = {0}", words.Length);
             Console.WriteLine("Unique words = {0}", hashmap.Count);
+        }
+
+        public static void CatalanNumbersTest() {
+            for (var i = 0; i < 15; i++) {
+                Console.Write("{0} ", CatalanNumbers.GetCatalan(i));
+            }
+
+            Console.WriteLine();
         }
     }
 }
