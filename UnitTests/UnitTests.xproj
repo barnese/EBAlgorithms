@@ -31,6 +31,7 @@
     <Compile Include="Data\TestData.cs" />
     <Compile Include="GeneralTests\CatalanNumbersTests.cs" />
     <Compile Include="GeneralTests\DocumentDistanceFinderTests.cs" />
+    <Compile Include="GeneralTests\LucasLehmerTests.cs" />
     <Compile Include="SortingTests\AVLSortTests.cs" />
     <Compile Include="SortingTests\CountingSortTests.cs" />
     <Compile Include="SortingTests\HeapSortTests.cs" />

@@ -11,8 +11,8 @@ namespace EBAlgorithmsConsole {
         public static void Main(string[] args) {
             //CompareSortAlgorithms();
             //HashMapTests();
-
-            CatalanNumbersTest();
+            //CatalanNumbersTest();
+            TestLucasLehmer();
         }
 
         public static void CompareSortAlgorithms() {
@@ -44,6 +44,16 @@ namespace EBAlgorithmsConsole {
         public static void CatalanNumbersTest() {
             for (var i = 0; i < 15; i++) {
                 Console.Write("{0} ", CatalanNumbers.GetCatalan(i));
+            }
+
+            Console.WriteLine();
+        }
+
+        public static void TestLucasLehmer() {
+            for (var i = 0; i < 10000; i++) {
+                if (LucasLehmerTest.IsPrime(i)) {
+                    Console.Write("{0} ", i);
+                }
             }
 
             Console.WriteLine();

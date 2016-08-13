@@ -24,6 +24,7 @@
     <Compile Include="DataStructures\Queue.cs" />
     <Compile Include="General\CatalanNumbers.cs" />
     <Compile Include="General\DocumentDistanceFinder.cs" />
+    <Compile Include="General\LucasLehmerTest.cs" />
     <Compile Include="Helpers\FileHelpers.cs" />
     <Compile Include="Helpers\MathHelpers.cs" />
     <Compile Include="Sorting\AVLSort.cs" />
