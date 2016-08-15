@@ -37,6 +37,7 @@
     <Compile Include="Sorting\RadixSort.cs" />
     <Compile Include="Sorting\SortDirection.cs" />
     <Compile Include="Strings\KarpRabin.cs" />
+    <Compile Include="Strings\StringExtensions.cs" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\DotNet\Microsoft.DotNet.targets" Condition="'$(VSToolsPath)' != ''" />
 </Project>

@@ -12,7 +12,8 @@ namespace EBAlgorithmsConsole {
             //CompareSortAlgorithms();
             //HashMapTests();
             //CatalanNumbersTest();
-            TestLucasLehmer();
+            //TestLucasLehmer();
+            TestStringPermutations();
         }
 
         public static void CompareSortAlgorithms() {
@@ -57,6 +58,17 @@ namespace EBAlgorithmsConsole {
             }
 
             Console.WriteLine();
+        }
+
+        public static void TestStringPermutations() {
+            var str = "cat";
+            var perms = str.FindPermutations();
+
+            foreach (var perm in perms) {
+                Console.Write("{0} ", perm);
+            }
+
+            Console.WriteLine("\nNumber of perms = {0}", perms.Count);
         }
     }
 }

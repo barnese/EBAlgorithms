@@ -40,6 +40,7 @@
     <Compile Include="SortingTests\QuickSortTests.cs" />
     <Compile Include="SortingTests\RadixSortTests.cs" />
     <Compile Include="StringTests\KarpRabinTests.cs" />
+    <Compile Include="StringTests\StringExtensionTests.cs" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\DotNet\Microsoft.DotNet.targets" Condition="'$(VSToolsPath)' != ''" />
 </Project>

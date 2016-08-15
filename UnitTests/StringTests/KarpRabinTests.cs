@@ -2,7 +2,7 @@
 using Xunit;
 using EBAlgorithms;
 
-namespace UnitTests {
+namespace EBAlgorithmsUnitTests {
     public class KarpRabinTests {
         [Fact]
         public void KarpRabin_Search() {            
