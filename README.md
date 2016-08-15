@@ -4,10 +4,10 @@ Experimental playground for various algorithms and data structures written in .N
 
 ## Contents
 
-- **Data structures** - Linked list, queue, binary search tree, AVL tree, hash map.
+- **Data structures** - Linked list, queue, binary search tree, AVL tree, hash map
 - **Sorting algorithms** - including mergesort, quicksort, heapsort, etc.
-- **Numbers** - Catalan numbers, Lucas-Lehmer Mersenne prime number test.
-- **Strings** - Karp Rabin search, find string permutations
+- **Numbers** - Catalan numbers, Lucas-Lehmer Mersenne prime number test
+- **Strings** - Karp Rabin search, permutation finder, palindrome check
 - **Other** - Document distance finder
 
 ## Project Layout

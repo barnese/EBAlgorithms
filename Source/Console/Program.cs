@@ -13,7 +13,7 @@ namespace EBAlgorithmsConsole {
             //HashMapTests();
             //CatalanNumbersTest();
             //TestLucasLehmer();
-            TestStringPermutations();
+            //TestStringPermutations();
         }
 
         public static void CompareSortAlgorithms() {

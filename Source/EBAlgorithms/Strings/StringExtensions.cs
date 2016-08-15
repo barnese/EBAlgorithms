@@ -30,6 +30,21 @@ namespace EBAlgorithms {
         }
 
         /// <summary>
+        /// Determines if the current string is a palindrome.
+        /// </summary>
+        public static bool IsPalindrome(this string str) {
+            int mid = str.Length / 2;
+
+            for (var i = 0; i < mid; i++) {
+                if (str[i] != str[str.Length - i - 1]) {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        /// <summary>
         /// Swaps the character at index i with the character at index j.
         /// </summary>
         public static string Swap(this string str, int i, int j) {
