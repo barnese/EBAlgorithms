@@ -8,7 +8,8 @@ namespace EBAlgorithms.DataStructures {
     }
 
     /// <summary>
-    /// Graph using "Adjacency List" implementation.
+    /// This graph data structure uses a dictionary of vertices and an 
+    /// "Adjacency List" (as a linked list) of their neighboring vertices.
     /// </summary>
     public class Graph<T> {
         private GraphType type;
@@ -48,16 +49,13 @@ namespace EBAlgorithms.DataStructures {
         /// A callback is invoked on each vertex visit.
         /// </summary>
         public void BreadthFirstSearch(T startVertex, Action<T> callback) {
-            var level = new Dictionary<T, int>();
-            var parent = new Dictionary<T, T>();
+            var level = new Dictionary<T, int>() { { startVertex, 0 } };
+            var parent = new Dictionary<T, T>() { { startVertex, default(T) } };
 
-            level.Add(startVertex, 0);
-            parent.Add(startVertex, default(T));
+            var frontier = new LinkedList<T>() { startVertex };
+            callback(startVertex);
 
             var i = 1;
-            var frontier = new LinkedList<T>();
-            frontier.Add(startVertex);
-            callback(startVertex);
 
             while (frontier.Count > 0) {
                 var next = new LinkedList<T>();
@@ -78,7 +76,33 @@ namespace EBAlgorithms.DataStructures {
                 frontier = next;
                 i++;
             }
+        }
 
+        /// <summary>
+        /// Traverses all vertices in the graph using depth-first search.
+        /// A callback is invoked on each vertex visit.
+        /// </summary>
+        public void DepthFirstSearch(Action<T> callback) {
+            var visited = new List<T>();
+
+            foreach (var vertex in adjDict.Keys) {
+                if (!visited.Contains(vertex)) {
+                    DepthFirstSearchVisit(vertex, visited, callback);
+                }
+            }
+        }
+
+        private void DepthFirstSearchVisit(T startVertex, List<T> visited, Action<T> callback) {
+            visited.Add(startVertex);
+            callback(startVertex);
+
+            if (adjDict.ContainsKey(startVertex)) {
+                foreach (var vertex in adjDict[startVertex]) {
+                    if (!visited.Contains(vertex)) {                        
+                        DepthFirstSearchVisit(vertex, visited, callback);
+                    }
+                }
+            }
         }
 
         public void Describe() {

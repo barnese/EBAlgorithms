@@ -52,20 +52,27 @@ namespace EBAlgorithmsConsole {
         }
 
         public static void TestGraph() {
-            var graph = new Graph<char>(GraphType.Directed);
+            var graph = new Graph<char>(GraphType.Undirected);
 
             graph.AddEdge('a', 'b');
-            graph.AddEdge('a', 'd');
+            graph.AddEdge('a', 'c');
             graph.AddEdge('a', 'e');
             graph.AddEdge('b', 'd');
-            graph.AddEdge('b', 'c');
-            graph.AddEdge('d', 'a');
-            graph.AddEdge('d', 'e');
-            graph.AddEdge('d', 'c');
+            graph.AddEdge('b', 'f');
+            graph.AddEdge('c', 'g');
+            graph.AddEdge('e', 'f');
 
             graph.Describe();
 
+            Console.WriteLine("Breadth-first search:");
+
             graph.BreadthFirstSearch('a', (vertex) => {
+                Console.Write("{0} ", vertex);
+            });
+
+            Console.WriteLine("\nDepth-first search:");
+
+            graph.DepthFirstSearch((vertex) => {
                 Console.Write("{0} ", vertex);
             });
 
