@@ -6,50 +6,45 @@ namespace EBAlgorithmsUnitTests {
     public class LinkedListTests {
         private LinkedList<int> list = new LinkedList<int>();
 
-        [Fact]
-        public void LinkedList_Add() {
-            list.Add(10);
-            Assert.Equal(list.Count, 1);
-        }
-
-        [Fact]
-        public void LinkedList_Delete() {
-            list.Add(5);
-            list.Delete(5);
-            Assert.Equal(list.Count, 0);
-
-            list.Add(1);
-            list.Add(2);
-            list.Add(3);
-            list.Delete(2);
-            Assert.Equal(list.Count, 2);
-        }
-
-        [Fact]
-        public void LinkedList_Describe() {
+        public LinkedListTests() {
             list.Add(2);
             list.Add(4);
             list.Add(6);
+        }
 
+        [Fact]
+        public void LinkedListTests_Add() {
+            Assert.Equal("[2, 4, 6]", list.Describe());
+            Assert.Equal(3, list.Count);
+        }
+
+        [Fact]
+        public void LinkedListTests_Contains() {
+            Assert.True(list.Contains(4));
+        }
+
+        [Fact]
+        public void LinkedListTests_Delete() {
+            list.Delete(4);
+            Assert.Equal(2, list.Count);
+            Assert.False(list.Contains(4));
+        }
+
+        [Fact]
+        public void LinkedListTests_Describe() {
             Assert.Equal(list.Describe(), "[2, 4, 6]");
         }
 
         [Fact]
-        public void LinkedList_Get() {
-            list.Add(1);
-            list.Add(2);
-            list.Add(3);
-
-            Assert.Equal(list.Get(1), 2);
+        public void LinkedListTests_Get() {
+            Assert.Equal(4, list.Get(1));
         }
 
         [Fact]
-        public void LinkedListInsert_Before() {
-            list.InsertBefore(0, 3);
-            Assert.Equal(list.Count, 1);
-
-            list.InsertBefore(1, 3);
-            Assert.Equal(list.Count, 2);
+        public void LinkedListTests_InsertBefore() {
+            list.InsertBefore(2, 3);
+            Assert.Equal(4, list.Count);
+            Assert.Equal(3, list.Get(0));
         }
     }
 }

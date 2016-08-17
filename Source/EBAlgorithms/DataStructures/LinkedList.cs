@@ -41,6 +41,20 @@ namespace EBAlgorithms.DataStructures {
             }
         }
 
+        public bool Contains(T value) {
+            var node = head;
+
+            while (node != null) {
+                if (node.value.Equals(value)) {
+                    return true;
+                }
+
+                node = node.next;
+            }
+
+            return false;
+        } 
+
         public int Count {
             get {
                 int count = 0;
@@ -99,7 +113,7 @@ namespace EBAlgorithms.DataStructures {
             var node = head;
 
             if (node == null) {
-                return default(T);
+                throw new Exception("List is empty.");
             }
 
             for (int i = 0; i < position; i++) {
@@ -107,7 +121,7 @@ namespace EBAlgorithms.DataStructures {
             }
 
             if (node == null) {
-                return default(T);
+                throw new Exception("Not found.");
             }
 
             return node.value;

@@ -14,6 +14,7 @@ namespace EBAlgorithmsConsole {
             //CatalanNumbersTest();
             //TestLucasLehmer();
             //TestStringPermutations();
+            TestGraph();
         }
 
         public static void CompareSortAlgorithms() {
@@ -46,6 +47,27 @@ namespace EBAlgorithmsConsole {
             for (var i = 0; i < 15; i++) {
                 Console.Write("{0} ", CatalanNumbers.GetCatalan(i));
             }
+
+            Console.WriteLine();
+        }
+
+        public static void TestGraph() {
+            var graph = new Graph<char>(GraphType.Directed);
+
+            graph.AddEdge('a', 'b');
+            graph.AddEdge('a', 'd');
+            graph.AddEdge('a', 'e');
+            graph.AddEdge('b', 'd');
+            graph.AddEdge('b', 'c');
+            graph.AddEdge('d', 'a');
+            graph.AddEdge('d', 'e');
+            graph.AddEdge('d', 'c');
+
+            graph.Describe();
+
+            graph.BreadthFirstSearch('a', (vertex) => {
+                Console.Write("{0} ", vertex);
+            });
 
             Console.WriteLine();
         }
