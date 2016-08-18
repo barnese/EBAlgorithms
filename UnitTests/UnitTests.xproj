@@ -30,8 +30,9 @@
     <Compile Include="DataStructureTests\LinkedListTests.cs" />
     <Compile Include="DataStructureTests\QueueTests.cs" />
     <Compile Include="Data\TestData.cs" />
+    <Compile Include="DistanceTests\DocumentDistanceTests.cs" />
+    <Compile Include="DistanceTests\EditDistanceTests.cs" />
     <Compile Include="GeneralTests\CatalanNumbersTests.cs" />
-    <Compile Include="GeneralTests\DocumentDistanceFinderTests.cs" />
     <Compile Include="GeneralTests\LucasLehmerTests.cs" />
     <Compile Include="SortingTests\AVLSortTests.cs" />
     <Compile Include="SortingTests\CountingSortTests.cs" />

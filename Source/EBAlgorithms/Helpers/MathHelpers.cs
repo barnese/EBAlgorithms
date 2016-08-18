@@ -35,5 +35,12 @@ namespace EBAlgorithms {
 
             return true;
         }
+
+        /// <summary>
+        /// Returns the minimum of three integers.
+        /// </summary>
+        public static int Min(int a, int b, int c) {
+            return Math.Min(a, Math.Min(b, c));
+        }
     }
 }

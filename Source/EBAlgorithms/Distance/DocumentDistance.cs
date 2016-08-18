@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Text;
 
 namespace EBAlgorithms
 {
-    public class DocumentDistanceFinder
+    public class DocumentDistance
     {
         /// <summary>
         /// Finds the distance between two files, where the distance is how many words are shared between the files.

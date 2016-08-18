@@ -5,10 +5,10 @@ Experimental playground for various algorithms and data structures written in .N
 ## Contents
 
 - **Generic Data structures** - LinkedList, Queue, BinarySearchTree, AVLTree, HashMap, Graph
-- **Sorting algorithms** - including mergesort, quicksort, heapsort, and others.
+- **Sorting** - including mergesort, quicksort, heapsort, and others.
+- **Distance** - Document distance using dot product of vectors, Levenshtein, Wagner-Fischer
 - **Numbers** - Catalan numbers, Lucas-Lehmer Mersenne prime number test
 - **Strings** - Karp Rabin search, permutation finder, palindrome check
-- **Other** - Document distance finder
 
 ## Project Layout
 
