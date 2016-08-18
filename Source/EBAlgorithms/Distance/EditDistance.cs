@@ -41,6 +41,11 @@ namespace EBAlgorithms {
             return MathHelpers.Min(characterDeletedFromS, characterDeletedFromT, characterDeletedFromBoth);
         }
 
+        /// <summary>
+        /// Determines the number of differences between two given strings
+        /// using the Wagner-Fischer algorithm (iterative with full matrix)
+        /// based on https://en.wikipedia.org/wiki/Wagner%E2%80%93Fischer_algorithm
+        /// </summary>
         public static int FindWagnerFischerDistance(string s, string t) {
             var size = Math.Max(s.Length, t.Length) + 1;
             var matrix = new int[size, size];
@@ -66,12 +71,12 @@ namespace EBAlgorithms {
             }
 
             // For debugging the matrix...
-            for (var i = 0; i < size; i++) {
-                for (var j = 0; j < size; j++) {
-                    Console.Write("{0} ", matrix[i, j]);
-                }
-                Console.WriteLine();
-            }
+            //for (var i = 0; i < size; i++) {
+            //    for (var j = 0; j < size; j++) {
+            //        Console.Write("{0} ", matrix[i, j]);
+            //    }
+            //    Console.WriteLine();
+            //}
 
             return matrix[s.Length, t.Length];
         }
