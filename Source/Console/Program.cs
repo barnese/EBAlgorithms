@@ -52,31 +52,37 @@ namespace EBAlgorithmsConsole {
         }
 
         public static void TestGraph() {
-            var graph = new Graph<char>(GraphType.Undirected);
+            var graph = new Graph<char>(GraphType.Directed);
 
             graph.AddEdge('a', 'b');
-            graph.AddEdge('a', 'c');
+            graph.AddEdge('a', 'd');
             graph.AddEdge('a', 'e');
             graph.AddEdge('b', 'd');
-            graph.AddEdge('b', 'f');
-            graph.AddEdge('c', 'g');
-            graph.AddEdge('e', 'f');
-
-            graph.Describe();
+            graph.AddEdge('b', 'c');
+            graph.AddEdge('d', 'c');
+            graph.AddEdge('d', 'a');
+            graph.AddEdge('d', 'e');
+            graph.AddVertex('c');
+            graph.AddVertex('e');
 
             Console.WriteLine("Breadth-first search:");
+            foreach (var v in graph.BreadthFirstSearch('a')) {
+                Console.Write("{0} ", v);
+            }
 
-            graph.BreadthFirstSearch('a', (vertex) => {
-                Console.Write("{0} ", vertex);
-            });
+            //Console.WriteLine("\nDepth-first search:");            
+            //foreach (var v in graph.DepthFirstSearch(2)) {
+            //    Console.Write("{0} ", v);
+            //}
 
-            Console.WriteLine("\nDepth-first search:");
+            //Console.WriteLine("\nTopological sort:");
+            //foreach (var vertex in graph.TopologicalSort(2)) {
+            //    Console.Write("{0} ", vertex);
+            //}
 
-            graph.DepthFirstSearch((vertex) => {
-                Console.Write("{0} ", vertex);
-            });
+            //Console.WriteLine("\n");
 
-            Console.WriteLine();
+            //graph.Describe();
         }
 
         public static void TestLucasLehmer() {

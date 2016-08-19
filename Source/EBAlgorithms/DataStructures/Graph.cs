@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace EBAlgorithms.DataStructures {
     public enum GraphType {
@@ -7,19 +8,67 @@ namespace EBAlgorithms.DataStructures {
         Undirected
     }
 
-    /// <summary>
-    /// This graph data structure uses a dictionary of vertices and an 
-    /// "Adjacency List" (as a linked list) of their neighboring vertices.
-    /// </summary>
+    public enum GraphVertexStatus {
+        Unvisited,
+        Discovered,
+        Finished
+    }
+
+    public class GraphVertex<T> {
+        public T value;
+        public List<T> neighbors = new List<T>();
+        public GraphVertexStatus status = GraphVertexStatus.Unvisited;
+        public int discoveryTime = 0;
+        public int finishTime = 0;
+        public int level = 0;
+
+        public GraphVertex() { }
+
+        public GraphVertex(T value) {
+            this.value = value;
+        }
+
+        public GraphVertex(T value, T neighbor) {
+            this.value = value;
+            neighbors.Add(neighbor);
+        }
+
+        public void AddNeighbor(T vertex) {
+            if (!neighbors.Contains(vertex)) {
+                neighbors.Add(vertex);
+                neighbors.Sort();
+            }
+        }
+
+        public void Reset() {
+            discoveryTime = 0;
+            finishTime = 0;
+            level = 0;
+            status = GraphVertexStatus.Unvisited;
+        }
+    }
+
     public class Graph<T> {
         private GraphType type;
-        private Dictionary<T, LinkedList<T>> adjDict;
+        private Dictionary<T, GraphVertex<T>> vertices = new Dictionary<T, GraphVertex<T>>();
+        private int dfsTime = 0;
 
         public Graph(GraphType type = GraphType.Undirected) {
-            adjDict = new Dictionary<T, LinkedList<T>>();
             this.type = type;
         }
 
+        /// <summary>
+        /// Adds a vertex to the graph.
+        /// </summary>
+        public void AddVertex(T vertex) {
+            if (!vertices.ContainsKey(vertex)) {
+                vertices.Add(vertex, new GraphVertex<T>(vertex));
+            }
+        }
+
+        /// <summary>
+        /// Adds an edge to the graph. Automatically adds new vertices.
+        /// </summary>
         public void AddEdge(T firstVertex, T secondVertex) {
             _AddEdge(firstVertex, secondVertex);
 
@@ -29,114 +78,126 @@ namespace EBAlgorithms.DataStructures {
         }
 
         private void _AddEdge(T firstVertex, T secondVertex) {
-            LinkedList<T> linkedList;
-
-            if (!adjDict.ContainsKey(firstVertex)) {
-                linkedList = new LinkedList<T>();
-                linkedList.Add(secondVertex);
-                adjDict.Add(firstVertex, linkedList);
+            if (!vertices.ContainsKey(firstVertex)) {
+                var vertex = new GraphVertex<T>(firstVertex, secondVertex);
+                vertices.Add(firstVertex, vertex);
             } else {
-                linkedList = adjDict[firstVertex];
-
-                if (!linkedList.Contains(secondVertex)) {
-                    linkedList.Add(secondVertex);
-                }
+                vertices[firstVertex].AddNeighbor(secondVertex);
             }
         }
 
         /// <summary>
-        /// Traverses the graph using breadth-first search from the given vertex. 
-        /// A callback is invoked on each vertex visit.
+        /// Prints a graph description to the console.
         /// </summary>
-        public void BreadthFirstSearch(T startVertex, Action<T> callback) {
-            var level = new Dictionary<T, int>() { { startVertex, 0 } };
-            var parent = new Dictionary<T, T>() { { startVertex, default(T) } };
-
-            var frontier = new LinkedList<T>() { startVertex };
-            callback(startVertex);
-
-            var i = 1;
-
-            while (frontier.Count > 0) {
-                var next = new LinkedList<T>();
-
-                foreach (var vertex in frontier) {
-                    if (adjDict.ContainsKey(vertex)) {
-                        foreach (var neighbor in adjDict[vertex]) {
-                            if (!level.ContainsKey(neighbor)) {
-                                level[neighbor] = i;
-                                parent[neighbor] = vertex;
-                                next.Add(neighbor);
-                                callback(neighbor);
-                            }
-                        }
-                    }
-                }
-
-                frontier = next;
-                i++;
-            }
-        }
-
-        /// <summary>
-        /// Traverses all vertices in the graph using depth-first search.
-        /// A callback is invoked on each vertex visit.
-        /// </summary>
-        public void DepthFirstSearch(Action<T> callback) {
-            var visited = new List<T>();
-
-            foreach (var vertex in adjDict.Keys) {
-                if (!visited.Contains(vertex)) {
-                    DepthFirstSearchVisit(vertex, visited, callback);
-                }
-            }
-        }
-
-        private void DepthFirstSearchVisit(T startVertex, List<T> visited, Action<T> callback) {
-            visited.Add(startVertex);
-            callback(startVertex);
-
-            if (adjDict.ContainsKey(startVertex)) {
-                foreach (var vertex in adjDict[startVertex]) {
-                    if (!visited.Contains(vertex)) {                        
-                        DepthFirstSearchVisit(vertex, visited, callback);
-                    }
-                }
-            }
-        }
-
         public void Describe() {
             Console.WriteLine("Graph is {0}", type.ToString());
 
-            foreach (var vertex in adjDict) {
+            foreach (var vertex in vertices) {
                 Console.Write("{0}: ", vertex.Key);
 
-                foreach (var item in vertex.Value) {
+                foreach (var item in vertex.Value.neighbors) {
                     Console.Write("{0} ", item);
                 }
+
+                Console.Write("{0}/{1}", vertex.Value.discoveryTime, vertex.Value.finishTime);
 
                 Console.WriteLine();
             }
         }
 
-        public void RemoveEdge(T firstVertex, T secondVertex) {
-            _RemoveEdge(firstVertex, secondVertex);
+        /// <summary>
+        /// Searches the graph using breadth-first search.
+        /// </summary>
+        /// <returns>List of vertices from the search</returns>
+        public List<T> BreadthFirstSearch(T vertex) {
+            var result = new List<T>();
+            var queue = new Queue<T>();
 
-            if (type == GraphType.Undirected) {
-                _RemoveEdge(secondVertex, firstVertex);
+            vertices[vertex].level = 0;
+            vertices[vertex].status = GraphVertexStatus.Discovered;
+            result.Add(vertex);
+
+            foreach (var neighbor in vertices[vertex].neighbors) {
+                vertices[neighbor].level = vertices[vertex].level + 1;
+                queue.Enqueue(neighbor);
             }
-        }
 
-        private void _RemoveEdge(T firstVertex, T secondVertex) {
-            if (adjDict.ContainsKey(firstVertex)) {
+            while (!queue.IsEmpty()) {
+                var v = queue.Dequeue();
 
-                var linkedList = adjDict[firstVertex];
-                linkedList.Delete(secondVertex);
+                if (vertices[v].status == GraphVertexStatus.Unvisited) {
+                    vertices[v].status = GraphVertexStatus.Discovered;
+                    result.Add(v);
 
-                if (linkedList.Count == 0) {
-                    adjDict.Remove(firstVertex);
+                    foreach (var neighbor in vertices[v].neighbors) {
+                        if (vertices[neighbor].status == GraphVertexStatus.Unvisited) {
+                            queue.Enqueue(neighbor);
+
+                            if (vertices[neighbor].level > vertices[v].level + 1) {
+                                vertices[neighbor].level = vertices[v].level + 1;
+                            }
+                        }
+                    }
                 }
             }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Searches the graph using depth-first search.
+        /// </summary>
+        /// <returns>List of vertices from the search</returns>
+        public List<T> DepthFirstSearch(T vertex) {
+            dfsTime = 1;
+
+            // Reset all meta data so multiple searches will produce correct data.
+            foreach (var v in vertices) {
+                v.Value.Reset();
+            }
+
+            var result = new List<T>();
+
+            foreach (var v in vertices) {
+                if (v.Value.status == GraphVertexStatus.Unvisited) {
+                    DepthFirstSearchVisit(v.Key, result);
+                }
+            }
+
+            return result;
+        }
+
+        private void DepthFirstSearchVisit(T startVertex, List<T> result) {
+            var vertex = vertices[startVertex];
+            vertex.status = GraphVertexStatus.Discovered;
+            vertex.discoveryTime = dfsTime++;
+            result.Add(vertex.value);
+
+            foreach (var neighbor in vertex.neighbors) {
+                if (vertices.ContainsKey(neighbor) && vertices[neighbor].status == GraphVertexStatus.Unvisited) {
+                    DepthFirstSearchVisit(neighbor, result);
+                }
+            }
+
+            vertex.status = GraphVertexStatus.Finished;
+            vertex.finishTime = dfsTime++;
+        }
+
+        /// <summary>
+        /// Returns a list of topologically sorted vertices.
+        /// </summary>
+        public List<T> TopologicalSort(T vertex) {
+            DepthFirstSearch(vertex);
+
+            // Sort the vertices by finish time.
+            var sortedDict = new SortedDictionary<int, T>();
+
+            foreach (var v in vertices) {
+                sortedDict.Add(v.Value.finishTime, v.Key);
+            }
+
+            // Return the vertices in reverse order.
+            return sortedDict.Values.Reverse().ToList();
         }
     }
 }
