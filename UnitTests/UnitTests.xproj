@@ -27,6 +27,7 @@
     <Compile Include="DataStructureTests\GraphTests.cs" />
     <Compile Include="DataStructureTests\HashMapOpenAddressingTests.cs" />
     <Compile Include="DataStructureTests\HashMapTests.cs" />
+    <Compile Include="DataStructureTests\HeapTests.cs" />
     <Compile Include="DataStructureTests\LinkedListTests.cs" />
     <Compile Include="DataStructureTests\QueueTests.cs" />
     <Compile Include="DataStructureTests\StackTests.cs" />

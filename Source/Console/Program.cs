@@ -14,7 +14,8 @@ namespace EBAlgorithmsConsole {
             //CatalanNumbersTest();
             //TestLucasLehmer();
             //TestStringPermutations();
-            TestGraph();
+            //TestGraph();
+            TestHeap();
         }
 
         public static void CompareSortAlgorithms() {
@@ -49,6 +50,11 @@ namespace EBAlgorithmsConsole {
             }
 
             Console.WriteLine();
+        }
+
+        public static void TestHeap() {
+            var heap = new Heap<int>(new List<int> { 4, 6, 1, 2, 5, 3 }, HeapType.MinHeap);
+            Console.WriteLine(heap.Describe());
         }
 
         public static void TestGraph() {

@@ -21,6 +21,7 @@
     <Compile Include="DataStructures\Hashing\HashEntry.cs" />
     <Compile Include="DataStructures\Hashing\HashMap.cs" />
     <Compile Include="DataStructures\Hashing\HashMapOpenAddressing.cs" />
+    <Compile Include="DataStructures\Heap.cs" />
     <Compile Include="DataStructures\LinkedList.cs" />
     <Compile Include="DataStructures\Queue.cs" />
     <Compile Include="DataStructures\Stack.cs" />
