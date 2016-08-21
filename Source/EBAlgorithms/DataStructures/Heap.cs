@@ -7,6 +7,10 @@ namespace EBAlgorithms.DataStructures {
         MaxHeap = 1
     }
 
+    /// <summary>
+    /// Generic implementation of a heap.
+    /// MinHeap (default) and MaxHeap types implemented.
+    /// </summary>
     public class Heap<T> where T : IComparable {
         private List<T> heap = new List<T>();
         private HeapType type;
@@ -19,6 +23,10 @@ namespace EBAlgorithms.DataStructures {
 
         public Heap(HeapType type = HeapType.MinHeap) {
             this.type = type;
+        }
+
+        public List<T> ToList() {
+            return heap;
         }
 
         #region Heap Position Helpers
@@ -39,7 +47,7 @@ namespace EBAlgorithms.DataStructures {
         } 
 
         private int Right(int index) {
-            return 2 * index + 2;
+            return Left(index) + 1;
         }
         #endregion
 
@@ -52,7 +60,7 @@ namespace EBAlgorithms.DataStructures {
         private void BuildHeap() {
             // Start heapifying at the last parent node in the heap and work backwards.
             for (var i = LastParent(); i >= 0; i--) {
-                Heapify(i);
+                Heapify(i, heap.Count - 1);
             }
         }
 
@@ -66,24 +74,42 @@ namespace EBAlgorithms.DataStructures {
             return description.TrimEnd();
         }
 
-        private void Heapify(int root) {
-            if (IsLeaf(root))
-                return;
-           
-            var leftIndex = Left(root);
-            var rightIndex = Right(root);
+        private void Heapify(int start, int end) {
+            var root = start;
 
-            // Find the smaller/larger child. Start with the left child.
-            var child = Left(root);
+            while (root * 2 + 1 <= end) {
+                // Start with the left child.
+                var child = Left(root);
 
-            // For MinHeap: If the right child is greater than the left child, use it. MaxHeap: Vice versa.
-            if (rightIndex < heap.Count && heap[rightIndex].CompareTo(heap[leftIndex]) * (int)type > 0) {
-                child++;
+                // For MinHeap: If the right child is greater than the left child, use it. MaxHeap: Vice versa.
+                if (child + 1 <= end && heap[child + 1].CompareTo(heap[child]) * (int)type > 0) {
+                    child++;
+                }
+
+                // For MinHeap: Is the largest child greater than the root? For MaxHeap: Vice versa.
+                if (heap[child].CompareTo(heap[root]) * (int)type > 0) {
+                    Swap(root, child);
+                    root = child;
+                } else {
+                    break;
+                }
             }
+        }
 
-            if (heap[root].CompareTo(heap[child]) * (int)type < 0) {
-                Swap(root, child);
-                Heapify(child);
+        public void Sort() {
+            BuildHeap();
+
+            int i = heap.Count - 1;
+
+            while (i > 0) {
+                // Swap the root with the last item in the heap.
+                Swap(i, 0);
+
+                // "Remove" the last item from consideration.
+                i--;
+
+                // Put the heap back into the proper order.
+                Heapify(0, i);
             }
         }
 
