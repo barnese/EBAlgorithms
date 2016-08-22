@@ -53,7 +53,7 @@ namespace EBAlgorithmsConsole {
         }
 
         public static void TestHeap() {
-            var heap = new Heap<int>(new List<int> { 55, 23, 74, 4, 40, 67, 89, 1, 20, 29, 54, 61, 72, 88, 99, 1, 3, 9, 30, 92 }, HeapType.MinHeap);
+            var heap = new Heap<int>(new List<int> { 16, 10, 7, 3, 4, 1, 2, 9, 8, 14 }, HeapType.MinHeap);
             Console.WriteLine(heap.Describe());
             heap.Sort();
             Console.WriteLine(heap.Describe());

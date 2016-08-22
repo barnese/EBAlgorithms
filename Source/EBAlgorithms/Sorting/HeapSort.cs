@@ -13,13 +13,7 @@ namespace EBAlgorithms {
         }
 
         public void Sort(SortDirection sortDirection = SortDirection.Ascending) {
-            Heap<T> heap;
-
-            if (sortDirection == SortDirection.Ascending) {
-                heap = new Heap<T>(list, HeapType.MaxHeap);
-            } else {
-                heap = new Heap<T>(list, HeapType.MinHeap);
-            }
+            Heap<T> heap = new Heap<T>(list, (HeapType)((int)sortDirection * -1));
 
             heap.Sort();
 

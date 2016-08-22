@@ -19,5 +19,12 @@ namespace EBAlgorithmsUnitTests {
             var expected = "20 10 12 7 8 6";
             Assert.Equal(expected, result);
         }
+
+        [Fact]
+        public void HeapTests_Add() {
+            var heap = new Heap<int>(new List<int> { 1, 3, 6, 5, 9, 8 }, HeapType.MinHeap);
+            heap.Add(-2);
+            Assert.Equal("-2 3 1 5 9 8 6", heap.Describe());
+        }
     }
 }
