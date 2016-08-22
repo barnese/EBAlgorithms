@@ -53,9 +53,10 @@ namespace EBAlgorithmsConsole {
         }
 
         public static void TestHeap() {
-            var heap = new Heap<int>(new List<int> { 16, 10, 7, 3, 4, 1, 2, 9, 8, 14 }, HeapType.MinHeap);
+            var heap = new Heap<int>(new List<int> { 13, 14, 16, 19, 21, 19, 68, 65, 26, 32, 31 }, HeapType.MinHeap);
             Console.WriteLine(heap.Describe());
-            heap.Sort();
+            var item = heap.RemoveRoot();
+            Console.WriteLine("Removed {0}", item);
             Console.WriteLine(heap.Describe());
         }
 

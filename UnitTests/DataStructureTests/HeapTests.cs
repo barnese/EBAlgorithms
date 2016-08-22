@@ -26,5 +26,20 @@ namespace EBAlgorithmsUnitTests {
             heap.Add(-2);
             Assert.Equal("-2 3 1 5 9 8 6", heap.Describe());
         }
+
+        [Fact]
+        public void HeapTests_RemoveMax() {
+            var heap = new Heap<int>(new List<int> { 8, 7, 6, 3, 1, 4 }, HeapType.MaxHeap);
+            var item = heap.RemoveRoot();
+            Assert.Equal(8, item);
+            Assert.Equal("7 4 6 3 1", heap.Describe());
+        }
+
+        [Fact]
+        public void HeapTests_RemoveMin() {
+            var heap = new Heap<int>(new List<int> { 13, 14, 16, 19, 21, 19, 68, 65, 26, 32, 31 }, HeapType.MinHeap);
+            Assert.Equal(13, heap.RemoveRoot());
+            Assert.Equal("14 19 16 26 21 19 68 65 31 32", heap.Describe());
+        }
     }
 }

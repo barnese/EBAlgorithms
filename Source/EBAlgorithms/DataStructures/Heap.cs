@@ -98,6 +98,20 @@ namespace EBAlgorithms.DataStructures {
             }
         }
 
+        public T RemoveRoot() {
+            if (list.Count == 0) {
+                throw new Exception("The heap is empty!");
+            }
+
+            var item = list[0];
+
+            list[0] = list[list.Count - 1];
+            list.RemoveAt(list.Count - 1);
+            Heapify(0, list.Count - 1);
+
+            return item;
+        }
+
         public void Sort() {
             BuildHeap();
 
