@@ -4,7 +4,7 @@ Experimental playground for various algorithms and data structures written in .N
 
 ## Contents
 
-- **Generic Data structures** - AVLTree, BinarySearchTree, Graph, HashMap, Heap, LinkedList, Queue, Stack
+- **Generic Data structures** - AVLTree, BinarySearchTree, Graph, HashMap, Heap, LinkedList, PriorityQueue, Queue, Stack
 - **Sorting** - including mergesort, quicksort, heapsort, and others
 - **Distance** - Document distance using dot product of vectors, Levenshtein, Wagner-Fischer
 - **Numbers** - Catalan numbers, Lucas-Lehmer Mersenne prime number test
