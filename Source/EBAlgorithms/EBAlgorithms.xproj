@@ -15,9 +15,12 @@
     <SchemaVersion>2.0</SchemaVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="DataStructures\Graph.cs" />
     <Compile Include="DataStructures\AVLTree.cs" />
     <Compile Include="DataStructures\BinarySearchTree.cs" />
+    <Compile Include="DataStructures\Graph\Graph.cs" />
+    <Compile Include="DataStructures\Graph\GraphType.cs" />
+    <Compile Include="DataStructures\Graph\GraphVertex.cs" />
+    <Compile Include="DataStructures\Graph\GraphVertexStatus.cs" />
     <Compile Include="DataStructures\Hashing\HashEntry.cs" />
     <Compile Include="DataStructures\Hashing\HashMap.cs" />
     <Compile Include="DataStructures\Hashing\HashMapOpenAddressing.cs" />

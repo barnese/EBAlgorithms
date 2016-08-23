@@ -3,51 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 
 namespace EBAlgorithms.DataStructures {
-    public enum GraphType {
-        Directed,
-        Undirected
-    }
-
-    public enum GraphVertexStatus {
-        Unvisited,
-        Discovered,
-        Finished
-    }
-
-    public class GraphVertex<T> {
-        public T value;
-        public List<T> neighbors = new List<T>();
-        public GraphVertexStatus status = GraphVertexStatus.Unvisited;
-        public int discoveryTime = 0;
-        public int finishTime = 0;
-        public int level = 0;
-
-        public GraphVertex() { }
-
-        public GraphVertex(T value) {
-            this.value = value;
-        }
-
-        public GraphVertex(T value, T neighbor) {
-            this.value = value;
-            neighbors.Add(neighbor);
-        }
-
-        public void AddNeighbor(T vertex) {
-            if (!neighbors.Contains(vertex)) {
-                neighbors.Add(vertex);
-                neighbors.Sort();
-            }
-        }
-
-        public void Reset() {
-            discoveryTime = 0;
-            finishTime = 0;
-            level = 0;
-            status = GraphVertexStatus.Unvisited;
-        }
-    }
-
+    /// <summary>
+    /// Defines a generic graph.
+    /// </summary>
     public class Graph<T> {
         private GraphType type;
         private Dictionary<T, GraphVertex<T>> vertices = new Dictionary<T, GraphVertex<T>>();
