@@ -25,6 +25,10 @@ namespace EBAlgorithms.DataStructures {
             this.type = type;
         }
 
+        public int Count {
+            get { return list.Count; }
+        }
+
         public List<T> ToList() {
             return list;
         }
@@ -67,6 +71,10 @@ namespace EBAlgorithms.DataStructures {
         }
 
         public string Describe() {
+            if (list.Count == 0) {
+                return "Empty";
+            }
+
             var description = "";
 
             foreach (T item in list) {
