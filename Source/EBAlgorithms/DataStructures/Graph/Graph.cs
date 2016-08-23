@@ -6,7 +6,7 @@ namespace EBAlgorithms.DataStructures {
     /// <summary>
     /// Defines a generic graph.
     /// </summary>
-    public class Graph<T> {
+    public class Graph<T> where T : IComparable {
         private GraphType type;
         private Dictionary<T, GraphVertex<T>> vertices = new Dictionary<T, GraphVertex<T>>();
         private int dfsTime = 0;
@@ -27,20 +27,20 @@ namespace EBAlgorithms.DataStructures {
         /// <summary>
         /// Adds an edge to the graph. Automatically adds new vertices.
         /// </summary>
-        public void AddEdge(T firstVertex, T secondVertex) {
-            _AddEdge(firstVertex, secondVertex);
+        public void AddEdge(T firstVertex, T secondVertex, int weight = -1) {
+            _AddEdge(firstVertex, secondVertex, weight);
 
             if (type == GraphType.Undirected) {
-                _AddEdge(secondVertex, firstVertex);
+                _AddEdge(secondVertex, firstVertex, weight);
             }
         }
 
-        private void _AddEdge(T firstVertex, T secondVertex) {
+        private void _AddEdge(T firstVertex, T secondVertex, int weight) {
             if (!vertices.ContainsKey(firstVertex)) {
-                var vertex = new GraphVertex<T>(firstVertex, secondVertex);
+                var vertex = new GraphVertex<T>(firstVertex, secondVertex, weight);
                 vertices.Add(firstVertex, vertex);
             } else {
-                vertices[firstVertex].AddNeighbor(secondVertex);
+                vertices[firstVertex].AddEdge(secondVertex, weight);
             }
         }
 
@@ -51,15 +51,9 @@ namespace EBAlgorithms.DataStructures {
             Console.WriteLine("Graph is {0}", type.ToString());
 
             foreach (var vertex in vertices) {
-                Console.Write("{0}: ", vertex.Key);
-
-                foreach (var item in vertex.Value.neighbors) {
-                    Console.Write("{0} ", item);
+                foreach (var item in vertex.Value.edges) {
+                    Console.WriteLine("{0} -> {1} {2} ", vertex.Key, item.Vertex, item.Weight);
                 }
-
-                Console.Write("{0}/{1}", vertex.Value.discoveryTime, vertex.Value.finishTime);
-
-                Console.WriteLine();
             }
         }
 
@@ -71,11 +65,17 @@ namespace EBAlgorithms.DataStructures {
             var result = new List<T>();
             var queue = new Queue<T>();
 
+            // Reset all meta data so multiple searches will produce correct data.
+            foreach (var v in vertices) {
+                v.Value.Reset();
+            }
+
             vertices[vertex].level = 0;
             vertices[vertex].status = GraphVertexStatus.Discovered;
             result.Add(vertex);
 
-            foreach (var neighbor in vertices[vertex].neighbors) {
+            foreach (var edge in vertices[vertex].edges) {
+                var neighbor = edge.Vertex;
                 vertices[neighbor].level = vertices[vertex].level + 1;
                 queue.Enqueue(neighbor);
             }
@@ -87,7 +87,8 @@ namespace EBAlgorithms.DataStructures {
                     vertices[v].status = GraphVertexStatus.Discovered;
                     result.Add(v);
 
-                    foreach (var neighbor in vertices[v].neighbors) {
+                    foreach (var edge in vertices[v].edges) {
+                        var neighbor = edge.Vertex;
                         if (vertices[neighbor].status == GraphVertexStatus.Unvisited) {
                             queue.Enqueue(neighbor);
 
@@ -131,7 +132,8 @@ namespace EBAlgorithms.DataStructures {
             vertex.discoveryTime = dfsTime++;
             result.Add(vertex.value);
 
-            foreach (var neighbor in vertex.neighbors) {
+            foreach (var edge in vertex.edges) {
+                var neighbor = edge.Vertex;
                 if (vertices.ContainsKey(neighbor) && vertices[neighbor].status == GraphVertexStatus.Unvisited) {
                     DepthFirstSearchVisit(neighbor, result);
                 }
