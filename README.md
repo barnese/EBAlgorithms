@@ -4,7 +4,7 @@ Experimental playground for various algorithms and data structures written in .N
 
 ## Contents
 
-- **Generic Data structures**
+* **Generic Data structures**
   * AVLTree
   * BinarySearchTree 
     * breadth-first traversal
@@ -26,7 +26,7 @@ Experimental playground for various algorithms and data structures written in .N
   * Queue
   * Stack
 
-- **Sorting** 
+* **Sorting** 
   * AVLSort
   * counting sort
   * heapsort
@@ -35,16 +35,16 @@ Experimental playground for various algorithms and data structures written in .N
   * quicksort
   * radix sort
 
-- **Distance** 
+* **Distance** 
   * Document distance using dot product of vectors
   * Levenshtein
   * Wagner-Fischer
 
-- **Numbers** 
+* **Numbers** 
   * Catalan numbers
   * Lucas-Lehmer Mersenne prime number test
 
-- **Strings** 
+* **Strings** 
   * Karp Rabin search
   * permutation finder
   * palindrome check
