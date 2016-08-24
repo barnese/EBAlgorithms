@@ -15,6 +15,8 @@ namespace EBAlgorithms.DataStructures {
             this.type = type;
         }
 
+        public Dictionary<T, GraphVertex<T>> Vertices { get { return vertices; } }
+
         /// <summary>
         /// Adds a vertex to the graph.
         /// </summary>
@@ -141,59 +143,6 @@ namespace EBAlgorithms.DataStructures {
 
             vertex.status = GraphVertexStatus.Finished;
             vertex.finishTime = dfsTime++;
-        }
-
-        /// <summary>
-        /// Determines the shortest paths in the graph using Dijkstra's algorithm.
-        /// </summary>
-        public List<T> FindShortestPathsByDijkstra(T startVertex) {
-            var shortestPaths = new List<T>();
-            var uncheckedVertices = new List<T>();
-            var distances = new Dictionary<T, int>();
-            
-            // Put all the vertices into the unchecked list and initialize all distances to "infinity".
-            foreach (var v in vertices) {
-                uncheckedVertices.Add(v.Key);
-                distances.Add(v.Key, int.MaxValue);
-            }
-
-            // The start vertex's distance is zero, since we start from there.
-            distances[startVertex] = 0;
-
-            while (uncheckedVertices.Count > 0) {
-                // Extract the minimum vertex based on its values in distances.
-                var u = FindMinimumDistanceVertex(uncheckedVertices, distances);
-                uncheckedVertices.Remove(u);
-
-                // Add the minimum vertex to the shortest paths list.
-                shortestPaths.Add(u);
-
-                // Relax each neighboring vertex so that the distance always has the smallest value.
-                foreach (var v in vertices[u].edges) {
-                    if (distances[v.Vertex] > distances[u] + v.Weight) {
-                        distances[v.Vertex] = distances[u] + v.Weight;
-                    }
-                }
-            }
-
-            return shortestPaths;
-        }
-
-        /// <summary>
-        /// Given a list of vertices, determines which is the smallest based on a dictionary of distances.
-        /// </summary>
-        private T FindMinimumDistanceVertex(List<T> vertices, Dictionary<T, int> distances) {
-            var minimumDistance = int.MaxValue;
-            var minimumVertex = vertices[0];
-
-            foreach (var vertex in vertices) {
-                if (distances[vertex] < minimumDistance) {
-                    minimumDistance = distances[vertex];
-                    minimumVertex = vertex;
-                }
-            }
-
-            return minimumVertex;
         }
 
         /// <summary>

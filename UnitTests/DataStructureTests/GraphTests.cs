@@ -112,7 +112,7 @@ namespace EBAlgorithmsUnitTests {
 
             var result = "";
 
-            foreach (var v in graph.FindShortestPathsByDijkstra('a')) {
+            foreach (var v in Dijkstra<char>.FindShortestPaths(graph, 'a')) {
                 result += v.ToString();
             }
 
@@ -135,7 +135,7 @@ namespace EBAlgorithmsUnitTests {
 
             var result = "";
 
-            foreach (var v in graph.FindShortestPathsByDijkstra('a')) {
+            foreach (var v in Dijkstra<char>.FindShortestPaths(graph, 'a')) {
                 result += v.ToString();
             }
 

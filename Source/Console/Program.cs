@@ -25,7 +25,7 @@ namespace EBAlgorithmsConsole {
 
             var result = "";
 
-            foreach (var v in graph.FindShortestPathsByDijkstra('a')) {
+            foreach (var v in Dijkstra<char>.FindShortestPaths(graph, 'a')) {
                 result += v.ToString();
             }
 
