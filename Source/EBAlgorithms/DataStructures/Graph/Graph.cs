@@ -9,6 +9,8 @@ namespace EBAlgorithms.DataStructures {
     public class Graph<T> where T : IComparable {
         private GraphType type;
         private Dictionary<T, GraphVertex<T>> vertices = new Dictionary<T, GraphVertex<T>>();
+        private List<GraphEdge<T>> edges = new List<GraphEdge<T>>();
+
         private int dfsTime = 0;
 
         public Graph(GraphType type = GraphType.Undirected) {
@@ -25,25 +27,39 @@ namespace EBAlgorithms.DataStructures {
                 vertices.Add(vertex, new GraphVertex<T>(vertex));
             }
         }
-
+       
         /// <summary>
         /// Adds an edge to the graph. Automatically adds new vertices.
         /// </summary>
-        public void AddEdge(T firstVertex, T secondVertex, int weight = -1) {
-            _AddEdge(firstVertex, secondVertex, weight);
+        public void AddEdge(T vertex1, T vertex2, int weight = -1) {
+            AddVertex(vertex1);
+            AddVertex(vertex2);
+
+            _AddEdge(vertex1, vertex2, weight);
 
             if (type == GraphType.Undirected) {
-                _AddEdge(secondVertex, firstVertex, weight);
+                _AddEdge(vertex2, vertex1, weight);
             }
         }
 
-        private void _AddEdge(T firstVertex, T secondVertex, int weight) {
-            if (!vertices.ContainsKey(firstVertex)) {
-                var vertex = new GraphVertex<T>(firstVertex, secondVertex, weight);
-                vertices.Add(firstVertex, vertex);
-            } else {
-                vertices[firstVertex].AddEdge(secondVertex, weight);
+        private void _AddEdge(T vertex1, T vertex2, int weight) {
+            if (!ContainsEdge(vertex1, vertex2)) {
+                edges.Add(new GraphEdge<T>(vertex1, vertex2, weight));
+                edges.Sort();
             }
+        }
+
+        /// <summary>
+        /// Determines if the given edge exists in the graph.
+        /// </summary>
+        public bool ContainsEdge(T vertex1, T vertex2) {
+            foreach (var edge in edges) {
+                if (edge.Vertex1.CompareTo(vertex1) == 0 && edge.Vertex2.CompareTo(vertex2) == 0) {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         /// <summary>
@@ -53,10 +69,19 @@ namespace EBAlgorithms.DataStructures {
             Console.WriteLine("Graph is {0}", type.ToString());
 
             foreach (var vertex in vertices) {
-                foreach (var item in vertex.Value.edges) {
-                    Console.WriteLine("{0} -> {1} {2} ", vertex.Key, item.Vertex, item.Weight);
+                foreach (var edge in edges) {
+                    if (edge.Vertex1.CompareTo(vertex.Value.Value) == 0) {
+                        Console.WriteLine("{0} -> {1} {2} ", vertex.Value, edge.Vertex2, edge.Weight);
+                    }
                 }
             }
+        }
+
+        /// <summary>
+        /// Finds all edges for the given vertex.
+        /// </summary>
+        public List<GraphEdge<T>> FindEdgesForVertex(T vertex) {
+            return edges.FindAll(e => e.Vertex1.CompareTo(vertex) == 0);
         }
 
         /// <summary>
@@ -72,30 +97,28 @@ namespace EBAlgorithms.DataStructures {
                 v.Value.Reset();
             }
 
-            vertices[vertex].level = 0;
-            vertices[vertex].status = GraphVertexStatus.Discovered;
+            vertices[vertex].Level = 0;
+            vertices[vertex].Status = GraphVertexStatus.Discovered;
             result.Add(vertex);
 
-            foreach (var edge in vertices[vertex].edges) {
-                var neighbor = edge.Vertex;
-                vertices[neighbor].level = vertices[vertex].level + 1;
-                queue.Enqueue(neighbor);
+            foreach (var edge in FindEdgesForVertex(vertex)) {
+                vertices[edge.Vertex2].Level = vertices[vertex].Level + 1;
+                queue.Enqueue(edge.Vertex2);
             }
 
             while (!queue.IsEmpty()) {
                 var v = queue.Dequeue();
 
-                if (vertices[v].status == GraphVertexStatus.Unvisited) {
-                    vertices[v].status = GraphVertexStatus.Discovered;
-                    result.Add(v);
+                if (vertices[v].Status == GraphVertexStatus.Unvisited) {
+                    vertices[v].Status = GraphVertexStatus.Discovered;
+                    result.Add(vertices[v].Value);
 
-                    foreach (var edge in vertices[v].edges) {
-                        var neighbor = edge.Vertex;
-                        if (vertices[neighbor].status == GraphVertexStatus.Unvisited) {
-                            queue.Enqueue(neighbor);
+                    foreach (var edge in FindEdgesForVertex(vertices[v].Value)) {
+                        if (vertices[edge.Vertex2].Status == GraphVertexStatus.Unvisited) {
+                            queue.Enqueue(edge.Vertex2);
 
-                            if (vertices[neighbor].level > vertices[v].level + 1) {
-                                vertices[neighbor].level = vertices[v].level + 1;
+                            if (vertices[edge.Vertex2].Level > vertices[v].Level + 1) {
+                                vertices[edge.Vertex2].Level = vertices[v].Level + 1;
                             }
                         }
                     }
@@ -120,7 +143,7 @@ namespace EBAlgorithms.DataStructures {
             var result = new List<T>();
 
             foreach (var v in vertices) {
-                if (v.Value.status == GraphVertexStatus.Unvisited) {
+                if (v.Value.Status == GraphVertexStatus.Unvisited) {
                     DepthFirstSearchVisit(v.Key, result);
                 }
             }
@@ -130,19 +153,18 @@ namespace EBAlgorithms.DataStructures {
 
         private void DepthFirstSearchVisit(T startVertex, List<T> result) {
             var vertex = vertices[startVertex];
-            vertex.status = GraphVertexStatus.Discovered;
-            vertex.discoveryTime = dfsTime++;
-            result.Add(vertex.value);
+            vertex.Status = GraphVertexStatus.Discovered;
+            vertex.DiscoveryTime = dfsTime++;
+            result.Add(vertex.Value);
 
-            foreach (var edge in vertex.edges) {
-                var neighbor = edge.Vertex;
-                if (vertices.ContainsKey(neighbor) && vertices[neighbor].status == GraphVertexStatus.Unvisited) {
-                    DepthFirstSearchVisit(neighbor, result);
+            foreach (var edge in FindEdgesForVertex(startVertex)) {
+                if (vertices.ContainsKey(edge.Vertex2) && vertices[edge.Vertex2].Status == GraphVertexStatus.Unvisited) {
+                    DepthFirstSearchVisit(edge.Vertex2, result);
                 }
             }
 
-            vertex.status = GraphVertexStatus.Finished;
-            vertex.finishTime = dfsTime++;
+            vertex.Status = GraphVertexStatus.Finished;
+            vertex.FinishTime = dfsTime++;
         }
 
         /// <summary>
@@ -155,7 +177,7 @@ namespace EBAlgorithms.DataStructures {
             var sortedDict = new SortedDictionary<int, T>();
 
             foreach (var v in vertices) {
-                sortedDict.Add(v.Value.finishTime, v.Key);
+                sortedDict.Add(v.Value.FinishTime, v.Key);
             }
 
             // Return the vertices in reverse order.

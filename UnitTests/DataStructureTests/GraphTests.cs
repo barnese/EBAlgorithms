@@ -43,8 +43,6 @@ namespace EBAlgorithmsUnitTests {
             graph.AddEdge('d', 'e');
             graph.AddEdge('e', 'f');
             graph.AddVertex('i');
-            graph.AddVertex('f');
-            graph.AddVertex('h');
 
             var result = "";
 
@@ -67,8 +65,6 @@ namespace EBAlgorithmsUnitTests {
             graph.AddEdge('d', 'c');
             graph.AddEdge('d', 'a');
             graph.AddEdge('d', 'e');
-            graph.AddVertex('c');
-            graph.AddVertex('e');
 
             var result = "";
 

@@ -6,7 +6,6 @@ namespace EBAlgorithms {
 
     public class HeapSort<T> where T : IComparable {
         private List<T> list;
-        private SortDirection sortDirection;
 
         public HeapSort(List<T> list) {
             this.list = list;

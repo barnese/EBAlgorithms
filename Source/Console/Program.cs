@@ -13,23 +13,28 @@ namespace EBAlgorithmsConsole {
 
             var graph = new Graph<char>(GraphType.Undirected);
 
-            graph.AddEdge('a', 'b', 4);
-            graph.AddEdge('a', 'c', 2);
-            graph.AddEdge('b', 'c', 1);
-            graph.AddEdge('b', 'd', 5);
-            graph.AddEdge('c', 'd', 8);
-            graph.AddEdge('c', 'e', 10);
-            graph.AddEdge('d', 'e', 2);
-            graph.AddEdge('d', 'z', 6);
-            graph.AddEdge('e', 'z', 3);
+            graph.AddEdge('a', 'b');
+            graph.AddEdge('a', 'e');
+            graph.AddEdge('b', 'f');
+            graph.AddEdge('c', 'g');
+            graph.AddEdge('d', 'e');
+            graph.AddEdge('d', 'h');
+            graph.AddEdge('e', 'h');
+            graph.AddEdge('f', 'i');
+            graph.AddEdge('f', 'j');
+            graph.AddEdge('f', 'g');
+            graph.AddEdge('g', 'j');
+            graph.AddEdge('h', 'i');
 
             var result = "";
 
-            foreach (var v in Dijkstra<char>.FindShortestPaths(graph, 'a')) {
+            foreach (var v in graph.DepthFirstSearch('a')) {
                 result += v.ToString();
             }
 
-            Console.WriteLine("Dijkstra's shortest path: {0}", result);
+            Console.WriteLine("Depth-first search = {0}", result);
+
+            //Assert.Equal("abfgcjihde", result);
         }
 
         public static void CompareSortAlgorithms() {

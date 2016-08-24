@@ -28,10 +28,10 @@ namespace EBAlgorithms.DataStructures {
                 // Add the minimum vertex to the shortest paths list.
                 shortestPaths.Add(u);
 
-                // Relax each neighboring vertex so that the distance always has the smallest value.
-                foreach (var v in graph.Vertices[u].edges) {
-                    if (distances[v.Vertex] > distances[u] + v.Weight) {
-                        distances[v.Vertex] = distances[u] + v.Weight;
+                // Relax each neighboring vertex so that the distance always has the smallest value.                
+                foreach (var v in graph.FindEdgesForVertex(u)) {
+                    if (distances[v.Vertex2] > distances[u] + v.Weight) {
+                        distances[v.Vertex2] = distances[u] + v.Weight;
                     }
                 }
             }
