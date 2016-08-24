@@ -11,35 +11,25 @@ namespace EBAlgorithmsConsole {
         public static void Main(string[] args) {
             //CompareSortAlgorithms();
 
-            var graph = new Graph<char>(GraphType.Directed);
+            var graph = new Graph<char>(GraphType.Undirected);
 
-            graph.AddEdge('a', 'b', 10);
-            graph.AddEdge('a', 'c', 3);
+            graph.AddEdge('a', 'b', 4);
+            graph.AddEdge('a', 'c', 2);
             graph.AddEdge('b', 'c', 1);
-            graph.AddEdge('b', 'd', 2);
-            graph.AddEdge('c', 'b', 4);
+            graph.AddEdge('b', 'd', 5);
             graph.AddEdge('c', 'd', 8);
-            graph.AddEdge('c', 'e', 2);
-            graph.AddEdge('d', 'e', 7);
-            graph.AddEdge('e', 'd', 9);
-
-            graph.Describe();
+            graph.AddEdge('c', 'e', 10);
+            graph.AddEdge('d', 'e', 2);
+            graph.AddEdge('d', 'z', 6);
+            graph.AddEdge('e', 'z', 3);
 
             var result = "";
 
-            foreach (var v in graph.DepthFirstSearch('a')) {
+            foreach (var v in graph.FindShortestPathsByDijkstra('a')) {
                 result += v.ToString();
             }
 
-            Console.WriteLine("Depth-first search: {0}", result);
-
-            result = "";
-
-            foreach (var v in graph.BreadthFirstSearch('a')) {
-                result += v.ToString();
-            }
-
-            Console.WriteLine("Breadth-first search: {0}", result);
+            Console.WriteLine("Dijkstra's shortest path: {0}", result);
         }
 
         public static void CompareSortAlgorithms() {

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace EBAlgorithmsUnitTests {
     public class GraphTests {
         [Fact]
-        public void GraphTests_UndirectedDFSTest() {
+        public void UndirectedDFS() {
             var graph = new Graph<char>(GraphType.Undirected);
 
             graph.AddEdge('a', 'b');
@@ -31,7 +31,7 @@ namespace EBAlgorithmsUnitTests {
         }
 
         [Fact]
-        public void GraphTests_DirectedDFSTest() {
+        public void DirectedDFS() {
             var graph = new Graph<char>(GraphType.Directed);
 
             graph.AddEdge('g', 'h');
@@ -56,7 +56,7 @@ namespace EBAlgorithmsUnitTests {
         }
 
         [Fact]
-        public void GraphTests_DirectedBFSTest() {
+        public void DirectedBFS() {
             var graph = new Graph<char>(GraphType.Directed);
 
             graph.AddEdge('a', 'b');
@@ -80,7 +80,7 @@ namespace EBAlgorithmsUnitTests {
         }
 
         [Fact]
-        public void GraphTests_UndirectedBFSTest() {
+        public void UndirectedBFS() {
             var graph = new Graph<int>();
 
             graph.AddEdge(0, 1);
@@ -94,6 +94,52 @@ namespace EBAlgorithmsUnitTests {
             var expected = new List<int> { 0, 1, 2, 4, 3, 5, 6 };
             var result = graph.BreadthFirstSearch(0);
             Assert.Equal(expected, result);
+        }
+
+        [Fact]
+        public void DijkstraDirected() {
+            var graph = new Graph<char>(GraphType.Directed);
+
+            graph.AddEdge('a', 'b', 10);
+            graph.AddEdge('a', 'c', 3);
+            graph.AddEdge('b', 'c', 1);
+            graph.AddEdge('b', 'd', 2);
+            graph.AddEdge('c', 'b', 4);
+            graph.AddEdge('c', 'd', 8);
+            graph.AddEdge('c', 'e', 2);
+            graph.AddEdge('d', 'e', 7);
+            graph.AddEdge('e', 'd', 9);
+
+            var result = "";
+
+            foreach (var v in graph.FindShortestPathsByDijkstra('a')) {
+                result += v.ToString();
+            }
+
+            Assert.Equal("acebd", result);
+        }
+
+        [Fact]
+        public void DijkstraUndirected() {
+            var graph = new Graph<char>(GraphType.Undirected);
+
+            graph.AddEdge('a', 'b', 4);
+            graph.AddEdge('a', 'c', 2);
+            graph.AddEdge('b', 'c', 1);
+            graph.AddEdge('b', 'd', 5);
+            graph.AddEdge('c', 'd', 8);
+            graph.AddEdge('c', 'e', 10);
+            graph.AddEdge('d', 'e', 2);
+            graph.AddEdge('d', 'z', 6);
+            graph.AddEdge('e', 'z', 3);
+
+            var result = "";
+
+            foreach (var v in graph.FindShortestPathsByDijkstra('a')) {
+                result += v.ToString();
+            }
+
+            Assert.Equal("acbdez", result);
         }
     }
 }
