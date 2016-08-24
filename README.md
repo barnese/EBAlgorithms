@@ -8,26 +8,21 @@ Experimental playground for various algorithms and data structures written in .N
   * AVLTree
   * BinarySearchTree 
     * breadth-first traversal
-	* depth-first traversal
-	  * in-order
-	  * pre-order
-	  * post-order
+	* depth-first traversal (in-order, pre-order and post-order)
   * Graph
     * breadth-first search
 	* depth-first search
 	* Dijkstra shortest paths
 	* Topological sort
   * HashMap
-  * Heap
-    * min-heap
-	* max-heap
+  * Heap (min-heap and max-heap)
   * LinkedList
   * PriorityQueue
   * Queue
   * Stack
 
 * **Sorting** 
-  * AVLSort
+  * AVL sort
   * counting sort
   * heapsort
   * insertion sort
