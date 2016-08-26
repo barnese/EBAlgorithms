@@ -17,6 +17,7 @@
   <ItemGroup>
     <Compile Include="DataStructures\AVLTree.cs" />
     <Compile Include="DataStructures\BinarySearchTree.cs" />
+    <Compile Include="DataStructures\Graph\BellmanFord.cs" />
     <Compile Include="DataStructures\Graph\Dijkstra.cs" />
     <Compile Include="DataStructures\Graph\Graph.cs" />
     <Compile Include="DataStructures\Graph\GraphEdge.cs" />

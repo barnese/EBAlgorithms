@@ -10,9 +10,8 @@ Experimental playground for various algorithms and data structures written in .N
     * breadth-first traversal
 	* depth-first traversal (in-order, pre-order and post-order)
   * Graph
-    * breadth-first search
-	* depth-first search
-	* Dijkstra shortest paths
+    * Search (breadth-first, depth-first)
+	* Find shortest paths using Dijkstra and Bellman-Ford
 	* Topological sort
   * HashMap
   * Heap (min-heap and max-heap)

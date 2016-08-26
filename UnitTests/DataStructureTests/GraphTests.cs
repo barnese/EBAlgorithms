@@ -137,5 +137,28 @@ namespace EBAlgorithmsUnitTests {
 
             Assert.Equal("acbdez", result);
         }
+
+        [Fact]
+        public void BellmanFordDirected() {
+            var graph = new Graph<char>(GraphType.Directed);
+
+            graph.AddEdge('s', 'a', 10);
+            graph.AddEdge('s', 'e', 8);
+            graph.AddEdge('e', 'd', 1);
+            graph.AddEdge('a', 'c', 2);
+            graph.AddEdge('d', 'a', -4);
+            graph.AddEdge('d', 'c', -1);
+            graph.AddEdge('c', 'b', -2);
+            graph.AddEdge('b', 'a', 1);
+
+            var result = BellmanFord<char>.FindShortestPaths(graph, 's');
+
+            Assert.Equal(0, result['s']);
+            Assert.Equal(5, result['a']);
+            Assert.Equal(8, result['e']);
+            Assert.Equal(9, result['d']);
+            Assert.Equal(7, result['c']);
+            Assert.Equal(5, result['b']);
+        }
     }
 }

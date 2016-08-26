@@ -17,6 +17,7 @@ namespace EBAlgorithms.DataStructures {
             this.type = type;
         }
 
+        public List<GraphEdge<T>> Edges { get { return edges; } }
         public Dictionary<T, GraphVertex<T>> Vertices { get { return vertices; } }
 
         /// <summary>
