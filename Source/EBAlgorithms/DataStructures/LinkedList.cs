@@ -16,29 +16,21 @@ namespace EBAlgorithms.DataStructures {
 
     public class LinkedList<T> : IEnumerable<T> {
         private LinkedListNode<T> head;
-
-        private LinkedListNode<T> lastNode
-        {
-            get
-            {
-                var node = head;
-
-                while (node.next != null) {
-                    node = node.next;
-                }
-
-                return node;
-            }
-        }
+        private LinkedListNode<T> tail;
+        private int count = 0;
 
         public void Add(T value) {
             var newItem = new LinkedListNode<T>(value);
 
             if (head == null) {
                 head = newItem;
+                tail = head;
             } else {
-                lastNode.next = newItem;
+                tail.next = newItem;
+                tail = tail.next;
             }
+
+            count++;
         }
 
         public bool Contains(T value) {
@@ -56,16 +48,7 @@ namespace EBAlgorithms.DataStructures {
         } 
 
         public int Count {
-            get {
-                int count = 0;
-
-                var node = head;
-
-                while (node != null) {
-                    count++;
-                    node = node.next;
-                }
-
+            get {               
                 return count;
             }
         }
@@ -82,6 +65,7 @@ namespace EBAlgorithms.DataStructures {
                         prev.next = node.next;
                     }
 
+                    count--;
                     break;
                 }
 
@@ -144,6 +128,7 @@ namespace EBAlgorithms.DataStructures {
                             head = newNode;
                         }
                         newNode.next = node;
+                        count++;
                         return;
                     }
 
