@@ -14,6 +14,28 @@ namespace EBAlgorithms {
         }
 
         /// <summary>
+        /// Determines the number of digits for the given integer.
+        /// </summary>
+        public static int GetIntLength(int number) {
+            return (int)Math.Log10((double)number) + 1;
+        }
+
+        /// <summary>
+        /// Determines if the given number is a palindrome.
+        /// </summary>
+        public static bool IsPalindrome(int number) {
+            var n = number.ToString();
+
+            for (var i = 0; i < n.Length / 2; i++) {
+                if (n[i] != n[n.Length - 1 - i]) {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        /// <summary>
         /// Determines if a number is prime.
         /// </summary>
         public static bool IsPrime(int number) {
@@ -41,6 +63,20 @@ namespace EBAlgorithms {
         /// </summary>
         public static int Min(int a, int b, int c) {
             return Math.Min(a, Math.Min(b, c));
+        }
+
+        /// <summary>
+        /// Reverses an integer.
+        /// </summary>
+        public static int Reverse(int number) {
+            var n = number.ToString();
+            var reversed = "";
+
+            for (var i = n.Length - 1; i >= 0; i--) {
+                reversed += n[i];
+            }
+
+            return int.Parse(reversed);
         }
     }
 }
