@@ -6,8 +6,7 @@ namespace EBAlgorithms.DataStructures {
         /// <summary>
         /// Determines the shortest paths in the graph using Dijkstra's algorithm.
         /// </summary>
-        public static List<T> FindShortestPaths(Graph<T> graph, T startVertex) {
-            var shortestPaths = new List<T>();
+        public static Dictionary<T, int> FindShortestPaths(Graph<T> graph, T startVertex, T endVertex = default(T)) {
             var uncheckedVertices = new List<T>();
             var distances = new Dictionary<T, int>();
 
@@ -25,18 +24,22 @@ namespace EBAlgorithms.DataStructures {
                 var u = FindMinimumDistanceVertex(uncheckedVertices, distances);
                 uncheckedVertices.Remove(u);
 
-                // Add the minimum vertex to the shortest paths list.
-                shortestPaths.Add(u);
+                // If endVertex was provided, stop checking since we have reached that vertex.
+                if (endVertex.CompareTo(u) == 0) {
+                    var result = new Dictionary<T, int>();
+                    result.Add(u, distances[u]);
+                    return result;
+                }
 
                 // Relax each neighboring vertex so that the distance always has the smallest value.                
                 foreach (var v in graph.FindEdgesForVertex(u)) {
                     if (distances[v.Vertex2] > distances[u] + v.Weight) {
                         distances[v.Vertex2] = distances[u] + v.Weight;
                     }
-                }
+                }                
             }
 
-            return shortestPaths;
+            return distances;
         }
 
         /// <summary>

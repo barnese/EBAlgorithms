@@ -112,7 +112,7 @@ namespace EBAlgorithmsUnitTests {
                 result += v.ToString();
             }
 
-            Assert.Equal("acebd", result);
+            Assert.Equal("[a, 0][b, 7][c, 3][d, 9][e, 5]", result);
         }
 
         [Fact]
@@ -135,7 +135,30 @@ namespace EBAlgorithmsUnitTests {
                 result += v.ToString();
             }
 
-            Assert.Equal("acbdez", result);
+            Assert.Equal("[a, 0][b, 3][c, 2][d, 8][e, 10][z, 13]", result);
+        }
+
+        [Fact]
+        public void DijkstraDirectedWithTarget() {
+            var graph = new Graph<char>(GraphType.Directed);
+
+            graph.AddEdge('a', 'b', 10);
+            graph.AddEdge('a', 'c', 3);
+            graph.AddEdge('b', 'c', 1);
+            graph.AddEdge('b', 'd', 2);
+            graph.AddEdge('c', 'b', 4);
+            graph.AddEdge('c', 'd', 8);
+            graph.AddEdge('c', 'e', 2);
+            graph.AddEdge('d', 'e', 7);
+            graph.AddEdge('e', 'd', 9);
+
+            var result = "";
+
+            foreach (var v in Dijkstra<char>.FindShortestPaths(graph, 'a', 'd')) {
+                result += v.ToString();
+            }
+
+            Assert.Equal("[d, 9]", result);
         }
 
         [Fact]
