@@ -10,8 +10,7 @@ using System.Numerics;
 namespace EBAlgorithmsConsole {
     public class Program {
         public static void Main(string[] args) {
-            //CompareSortAlgorithms();
-            PalindromeIntegers.RunTest();       
+            CompareSortAlgorithms();
         }
 
         public static void CompareSortAlgorithms() {

@@ -9,35 +9,44 @@ namespace EBAlgorithms {
             this.list = list;
         }
 
+        /// <summary>
+        /// Quicksort recursively partitions the array until it is sorted.
+        /// Runtime complexity: O(n^2), but average case is O(n log n).
+        /// </summary>
         public void Sort() {
             Sort(0, list.Count - 1);
         }
 
-        private void Sort(int p, int r) {
-            if (p < r) {
-                var q = Partition(p, r);
-                Sort(p, q - 1);
-                Sort(q + 1, r);
+        private void Sort(int left, int right) {
+            int index = Partition(left, right);
+
+            if (left < index - 1) {
+                Sort(left, index - 1);
+            }
+
+            if (index < right) {
+                Sort(index, right);
             }
         }
 
         /// <summary>
         /// Partitions the subarray such that elements less than the pivot are on the left
-        /// and all others are on the right. The pivot is chosen to be list[r].
+        /// and all others are on the right. The pivot is chosen to be the subarray midpoint.
         /// </summary>
         /// <returns>Index of the pivot</returns>
-        private int Partition(int p, int r) {
-            var q = p;
+        private int Partition(int left, int right) {
+            T pivot = list[(left + right) / 2];
 
-            for (var j = p; j < r; j++) {
-                if (list[j].CompareTo(list[r]) <= 0) {
-                    Swap(j, q++);
+            while (left <= right) {
+                while (list[left].CompareTo(pivot) < 0) { left++; }
+                while (list[right].CompareTo(pivot) > 0) { right--; }
+
+                if (left <= right) {
+                    Swap(left++, right--);
                 }
             }
 
-            Swap(r, q);
-
-            return q;
+            return left;
         }
 
         private void Swap(int i, int j) {
