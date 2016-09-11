@@ -37,6 +37,7 @@
     <Compile Include="General\CatalanNumbers.cs" />
     <Compile Include="General\LucasLehmerTest.cs" />
     <Compile Include="General\PalindromeIntegers.cs" />
+    <Compile Include="General\SieveOfEratosthenes.cs" />
     <Compile Include="Helpers\FileHelpers.cs" />
     <Compile Include="Helpers\MathHelpers.cs" />
     <Compile Include="Sorting\AVLSort.cs" />

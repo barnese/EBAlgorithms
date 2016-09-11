@@ -37,6 +37,7 @@
     <Compile Include="DistanceTests\EditDistanceTests.cs" />
     <Compile Include="GeneralTests\CatalanNumbersTests.cs" />
     <Compile Include="GeneralTests\LucasLehmerTests.cs" />
+    <Compile Include="GeneralTests\SieveOfEratosthenesTests.cs" />
     <Compile Include="SortingTests\AVLSortTests.cs" />
     <Compile Include="SortingTests\CountingSortTests.cs" />
     <Compile Include="SortingTests\HeapSortTests.cs" />

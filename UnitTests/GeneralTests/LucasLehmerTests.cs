@@ -6,7 +6,7 @@ using System.Collections.Generic;
 namespace EBAlgorithmsUnitTests {
     public class LucasLehmerTests {
         [Fact]
-        public void CatalanNumbersTest() {
+        public void MersennePrimeTest() {
             var expected = new int[] { 2, 3, 5, 7, 13, 17, 19, 31, 61, 89, 107, 127 };
             var result = new List<int>();
 
