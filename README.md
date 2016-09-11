@@ -37,6 +37,7 @@ Experimental playground for various algorithms and data structures written in .N
 * **Numbers** 
   * Catalan numbers
   * Lucas-Lehmer Mersenne prime number test
+  * Sieve of Eratosthenes
 
 * **Strings** 
   * Karp Rabin search
