@@ -75,16 +75,10 @@ namespace EBAlgorithmsConsole {
             // Randomly swap values.
             for (var i = 0; i < size; i++) {
                 var randomIndex = random.Next(0, size);
-                Swap(list, i, randomIndex);
+                list.Swap(i, randomIndex);
             }
 
             return list;
         }
-
-        private void Swap(List<int> list, int i, int j) {
-            int temp = list[i];
-            list[i] = list[j];
-            list[j] = temp;
-        }    
     }
 }

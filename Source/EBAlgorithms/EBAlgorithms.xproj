@@ -35,10 +35,12 @@
     <Compile Include="Distance\DocumentDistance.cs" />
     <Compile Include="Distance\EditDistance.cs" />
     <Compile Include="General\CatalanNumbers.cs" />
+    <Compile Include="General\HeapsAlgorithm.cs" />
     <Compile Include="General\LucasLehmerTest.cs" />
     <Compile Include="General\PalindromeIntegers.cs" />
     <Compile Include="General\SieveOfEratosthenes.cs" />
     <Compile Include="Helpers\FileHelpers.cs" />
+    <Compile Include="Helpers\ListExtensions.cs" />
     <Compile Include="Helpers\MathHelpers.cs" />
     <Compile Include="Sorting\AVLSort.cs" />
     <Compile Include="Sorting\CountingSort.cs" />
