@@ -43,6 +43,7 @@
     <Compile Include="Helpers\ListExtensions.cs" />
     <Compile Include="Helpers\MathHelpers.cs" />
     <Compile Include="Sorting\AVLSort.cs" />
+    <Compile Include="Sorting\BucketSort.cs" />
     <Compile Include="Sorting\CountingSort.cs" />
     <Compile Include="Sorting\HeapSort.cs" />
     <Compile Include="Sorting\InsertionSort.cs" />

@@ -40,6 +40,7 @@
     <Compile Include="GeneralTests\LucasLehmerTests.cs" />
     <Compile Include="GeneralTests\SieveOfEratosthenesTests.cs" />
     <Compile Include="SortingTests\AVLSortTests.cs" />
+    <Compile Include="SortingTests\BucketSortTests.cs" />
     <Compile Include="SortingTests\CountingSortTests.cs" />
     <Compile Include="SortingTests\HeapSortTests.cs" />
     <Compile Include="SortingTests\InsertionSortTests.cs" />
