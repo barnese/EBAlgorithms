@@ -22,6 +22,7 @@ Experimental playground for various algorithms and data structures written in .N
 
 * **Sorting** 
   * AVL sort
+  * bucket sort
   * counting sort
   * heapsort
   * insertion sort
