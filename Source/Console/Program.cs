@@ -10,11 +10,7 @@ using System.Numerics;
 namespace EBAlgorithmsConsole {
     public class Program {
         public static void Main(string[] args) {
-            //CompareSortAlgorithms();
-
-            var number = 40667873;
-            var result = PrimeNumbers.IsPrime(number) ? "prime" : "not prime";
-            Console.WriteLine("{0} is {1}", number, result);
+            CompareSortAlgorithms();
         }
 
         public static void CompareSortAlgorithms() {

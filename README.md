@@ -38,6 +38,7 @@ Experimental playground for various algorithms and data structures written in .N
 * **Numbers** 
   * Catalan numbers
   * Heap's Algorithm for finding permutations of a list of integers
+  * General prime number test
   * Lucas-Lehmer Mersenne prime number test
   * Sieve of Eratosthenes
 
