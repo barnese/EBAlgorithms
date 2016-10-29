@@ -38,6 +38,7 @@
     <Compile Include="General\HeapsAlgorithm.cs" />
     <Compile Include="General\LucasLehmerTest.cs" />
     <Compile Include="General\PalindromeIntegers.cs" />
+    <Compile Include="General\PrimeNumbers.cs" />
     <Compile Include="General\SieveOfEratosthenes.cs" />
     <Compile Include="Helpers\FileHelpers.cs" />
     <Compile Include="Helpers\ListExtensions.cs" />

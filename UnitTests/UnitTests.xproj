@@ -38,6 +38,7 @@
     <Compile Include="GeneralTests\CatalanNumbersTests.cs" />
     <Compile Include="GeneralTests\HeapsAlgorithmTests.cs" />
     <Compile Include="GeneralTests\LucasLehmerTests.cs" />
+    <Compile Include="GeneralTests\PrimeNumbersTests.cs" />
     <Compile Include="GeneralTests\SieveOfEratosthenesTests.cs" />
     <Compile Include="SortingTests\AVLSortTests.cs" />
     <Compile Include="SortingTests\BucketSortTests.cs" />
