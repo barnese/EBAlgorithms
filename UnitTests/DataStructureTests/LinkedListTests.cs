@@ -13,35 +13,35 @@ namespace EBAlgorithmsUnitTests {
         }
 
         [Fact]
-        public void LinkedListTests_Add() {
+        public void TestAdd() {
             Assert.Equal("[2, 4, 6]", list.Describe());
             Assert.Equal(3, list.Count);
         }
 
         [Fact]
-        public void LinkedListTests_Contains() {
+        public void TestContainsValue() {
             Assert.True(list.Contains(4));
         }
 
         [Fact]
-        public void LinkedListTests_Delete() {
+        public void TestDeletingValue() {
             list.Delete(4);
             Assert.Equal(2, list.Count);
             Assert.False(list.Contains(4));
         }
 
         [Fact]
-        public void LinkedListTests_Describe() {
+        public void TestDescribingList() {
             Assert.Equal(list.Describe(), "[2, 4, 6]");
         }
 
         [Fact]
-        public void LinkedListTests_Get() {
+        public void TestGettingValue() {
             Assert.Equal(4, list.Get(1));
         }
 
         [Fact]
-        public void LinkedListTests_InsertBefore() {
+        public void TestInsertingValueBefore() {
             list.InsertBefore(2, 3);
             Assert.Equal(4, list.Count);
             Assert.Equal(3, list.Get(0));

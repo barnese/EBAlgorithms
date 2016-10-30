@@ -8,13 +8,13 @@ namespace EBAlgorithmsUnitTests {
         private List<int> list = TestData.Numbers;
 
         [Fact]
-        public void HeapSort_IntegersAscending() {
+        public void TestSortingIntegersAscending() {
             list.HeapSort(SortDirection.Ascending);
             Assert.True(list.IsSorted(SortDirection.Ascending));
         }
 
         [Fact]
-        public void HeapSort_IntegersDescending() {
+        public void TestSortingIntegersDescending() {
             list.HeapSort(SortDirection.Descending);
             Assert.True(list.IsSorted(SortDirection.Descending));
         }

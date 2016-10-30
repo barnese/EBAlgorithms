@@ -16,7 +16,7 @@ namespace EBAlgorithmsUnitTests {
         }
 
         [Fact]
-        public void HashMapOpenAddressing_Put() {
+        public void TestPut() {
             Assert.Equal(englishNumbers.Count, numberMap.Count);
 
             for (var i = 0; i < englishNumbers.Count; i++) {
@@ -26,7 +26,7 @@ namespace EBAlgorithmsUnitTests {
         }
 
         [Fact]
-        public void HashMapOpenAddressing_Delete() {
+        public void TestDelete() {
             var key = "four";
             numberMap.Delete(key);
             Assert.False(numberMap.ContainsKey(key));

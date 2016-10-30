@@ -8,7 +8,7 @@ namespace EBAlgorithmsUnitTests {
         private string file2 = "Data/DistanceData2.txt";
 
         [Fact]
-        public void DocumentDistance_FindDifferingDistance() {
+        public void TestFindingDifferingDistance() {
             var documentDistance = new DocumentDistance();
 
             var distance = documentDistance.FindDistance(file1, file2);
@@ -18,7 +18,7 @@ namespace EBAlgorithmsUnitTests {
         }
 
         [Fact]
-        public void DocumentDistance_FindIdenticalDistance() {
+        public void TestFindingIdenticalDistance() {
             var documentDistance = new DocumentDistance();
 
             var distance = documentDistance.FindDistance(file1, file1);

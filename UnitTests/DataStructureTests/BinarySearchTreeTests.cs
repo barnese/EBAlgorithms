@@ -11,7 +11,7 @@ namespace EBAlgorithmsUnitTests {
         private int height = 4;
 
         [Fact]
-        public void BinarySearchTree_Add() {
+        public void TestAdd() {
             Assert.Equal(tree.Count, numbers.Length);
 
             foreach (int number in numbers) {
@@ -20,7 +20,7 @@ namespace EBAlgorithmsUnitTests {
         }
 
         [Fact]
-        public void BinarySearchTree_Delete() {
+        public void TestDelete() {
             foreach (int number in numbers) {
                 tree.Delete(number);
                 Assert.False(tree.ContainsKey(number));
@@ -30,12 +30,12 @@ namespace EBAlgorithmsUnitTests {
         }
 
         [Fact]
-        public void BinarySearchTree_Height() {
+        public void TestHeight() {
             Assert.Equal(tree.Height, height);
         }
 
         [Fact] 
-        public void BinarySearchTree_LevelOrderTraversal() {
+        public void TestLevelOrderTraversal() {
             var expected = new List<int> { 6, 2, 7, 1, 4, 9, 3, 5, 8 };
 
             var i = 0;
@@ -45,7 +45,7 @@ namespace EBAlgorithmsUnitTests {
         }
 
         [Fact] 
-        public void BinarySearchTree_InOrderTraversal() {
+        public void TestInOrderTraversal() {
             var expected = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 
             var i = 0;
@@ -55,7 +55,7 @@ namespace EBAlgorithmsUnitTests {
         }
 
         [Fact]
-        public void BinarySearchTree_PreOrderTraversal() {
+        public void TestPreOrderTraversal() {
             var expected = new List<int> { 6, 2, 1, 4, 3, 5, 7, 9, 8 };
 
            var i = 0;
@@ -65,7 +65,7 @@ namespace EBAlgorithmsUnitTests {
         }
 
         [Fact]
-        public void BinarySearchTree_PostOrderTraversal() {
+        public void TestPostOrderTraversal() {
             var expected = new List<int> { 1, 3, 5, 4, 2, 8, 9, 7, 6 };
 
             var i = 0;

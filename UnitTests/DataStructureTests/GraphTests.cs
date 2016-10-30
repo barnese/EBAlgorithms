@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace EBAlgorithmsUnitTests {
     public class GraphTests {
         [Fact]
-        public void UndirectedDFS() {
+        public void TestUndirectedDFS() {
             var graph = new Graph<char>(GraphType.Undirected);
 
             graph.AddEdge('a', 'b');
@@ -31,7 +31,7 @@ namespace EBAlgorithmsUnitTests {
         }
 
         [Fact]
-        public void DirectedDFS() {
+        public void TestDirectedDFS() {
             var graph = new Graph<char>(GraphType.Directed);
 
             graph.AddEdge('g', 'h');
@@ -54,7 +54,7 @@ namespace EBAlgorithmsUnitTests {
         }
 
         [Fact]
-        public void DirectedBFS() {
+        public void TestDirectedBFS() {
             var graph = new Graph<char>(GraphType.Directed);
 
             graph.AddEdge('a', 'b');
@@ -76,7 +76,7 @@ namespace EBAlgorithmsUnitTests {
         }
 
         [Fact]
-        public void UndirectedBFS() {
+        public void TestUndirectedBFS() {
             var graph = new Graph<int>();
 
             graph.AddEdge(0, 1);
@@ -93,7 +93,7 @@ namespace EBAlgorithmsUnitTests {
         }
 
         [Fact]
-        public void DijkstraDirected() {
+        public void TestDijkstraDirected() {
             var graph = new Graph<char>(GraphType.Directed);
 
             graph.AddEdge('a', 'b', 10);
@@ -116,7 +116,7 @@ namespace EBAlgorithmsUnitTests {
         }
 
         [Fact]
-        public void DijkstraUndirected() {
+        public void TestDijkstraUndirected() {
             var graph = new Graph<char>(GraphType.Undirected);
 
             graph.AddEdge('a', 'b', 4);
@@ -139,7 +139,7 @@ namespace EBAlgorithmsUnitTests {
         }
 
         [Fact]
-        public void DijkstraDirectedWithTarget() {
+        public void TestDijkstraDirectedWithTarget() {
             var graph = new Graph<char>(GraphType.Directed);
 
             graph.AddEdge('a', 'b', 10);
@@ -162,7 +162,7 @@ namespace EBAlgorithmsUnitTests {
         }
 
         [Fact]
-        public void BellmanFordDirected() {
+        public void TestBellmanFordDirected() {
             var graph = new Graph<char>(GraphType.Directed);
 
             graph.AddEdge('s', 'a', 10);

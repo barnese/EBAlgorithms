@@ -6,7 +6,7 @@ using System.Collections.Generic;
 namespace EBAlgorithmsUnitTests {
     public class HeapsAlgorithmTests {
         [Fact]
-        public void FindPermutationsTest() {
+        public void TestFindingPermutations() {
             var input = new List<int> { 1, 2, 3 };
 
             var expected = new List<List<int>> {

@@ -6,7 +6,7 @@ namespace EBAlgorithmsUnitTests {
     public class MergeSortTests {
 
         [Fact]
-        public void MergeSort_Integers() {
+        public void TestSortingIntegers() {
             var list = TestData.Numbers;
 
             list.MergeSort();
@@ -15,7 +15,7 @@ namespace EBAlgorithmsUnitTests {
         }
 
         [Fact]
-        public void MergeSort_Strings() {
+        public void TestSortingStrings() {
             var list = TestData.Words;
 
             list.MergeSort();

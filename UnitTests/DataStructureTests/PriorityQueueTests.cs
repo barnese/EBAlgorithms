@@ -4,7 +4,7 @@ using EBAlgorithms.DataStructures;
 namespace EBAlgorithmsUnitTests {
     public class PriorityQueueTests {
         [Fact]
-        public void PriorityQueueTests_AddRemove() {
+        public void TestAddRemove() {
             var queue = new PriorityQueue<char>(PriorityQueueComparator.MaxPriorityFirst);
             queue.Add('E', 5);
             queue.Add('C', 2);

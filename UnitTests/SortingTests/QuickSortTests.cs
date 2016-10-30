@@ -6,7 +6,7 @@ namespace EBAlgorithmsUnitTests {
     public class QuickSortTests {
 
         [Fact]
-        public void QuickSort_Integers() {
+        public void TestSortingIntegers() {
             var numberOfValues = 100;
             var list = TestData.GetRandomIntList(numberOfValues, 0, numberOfValues, false);
            

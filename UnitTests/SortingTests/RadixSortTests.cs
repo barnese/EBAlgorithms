@@ -6,7 +6,7 @@ namespace EBAlgorithmsUnitTests {
     public class RadixSortTests {
 
         [Fact]
-        public void RadixSort_Integers() {
+        public void TestSortingIntegers() {
             var list = TestData.Numbers;
 
             RadixSortInt.Sort(list);

@@ -6,7 +6,7 @@ namespace EBAlgorithmsUnitTests {
     public class InsertionSortTests {
 
         [Fact]
-        public void InsertionSort_Integers() {
+        public void TestSortingIntegers() {
             var list = TestData.Numbers;
 
             list.InsertionSort();
@@ -15,7 +15,7 @@ namespace EBAlgorithmsUnitTests {
         }
 
         [Fact]
-        public void InsertionSort_Strings() {
+        public void TestSortingStrings() {
             var list = TestData.Words;
 
             list.InsertionSort();

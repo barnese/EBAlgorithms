@@ -4,10 +4,19 @@ using System;
 
 namespace EBAlgorithmsUnitTests {
     public class StackTests {
-        private Stack<char> stack = new Stack<char>();
+        [Fact]
+        public void TestIsEmpty() {
+            Stack<char> stack = new Stack<char>();
+            Assert.True(stack.IsEmpty);
+
+            stack.Push('a');
+
+            Assert.False(stack.IsEmpty);
+        }
 
         [Fact]
-        public void Stack_PushPeekPop() {
+        public void TestPush() {
+            Stack<char> stack = new Stack<char>();
             Assert.True(stack.IsEmpty);
 
             stack.Push('a');
@@ -18,14 +27,28 @@ namespace EBAlgorithmsUnitTests {
 
             Assert.Equal(5, stack.Count);
             Assert.Equal('e', stack.Peek());
+        }
 
-            var item = stack.Pop();
-            Assert.Equal('e', item);
-            Assert.Equal(4, stack.Count);
+        [Fact]
+        public void TestPeek() {
+            Stack<char> stack = new Stack<char>();
+            stack.Push('a');
+            stack.Push('b');
 
+            Assert.Equal('b', stack.Peek());
+            Assert.Equal(2, stack.Count);
+        }
+
+        [Fact]
+        public void TestPop() {
+            Stack<char> stack = new Stack<char>();
+            stack.Push('a');
+            stack.Push('b');
             stack.Pop();
-            stack.Pop();
-            stack.Pop();
+
+            Assert.True(stack.Count == 1);
+            Assert.Equal('a', stack.Peek());
+
             stack.Pop();
 
             Assert.True(stack.IsEmpty);

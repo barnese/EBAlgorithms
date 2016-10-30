@@ -5,7 +5,7 @@ using EBAlgorithms;
 namespace EBAlgorithmsUnitTests {
     public class EditDistanceTests {
         [Fact]
-        public void EditDistance_IdenticalTest() {
+        public void TestFindingNoEdits() {
             var s = "same";
             var t = "same";
             var expected = 0;
@@ -14,7 +14,7 @@ namespace EBAlgorithmsUnitTests {
         }
 
         [Fact]
-        public void EditDistance_DifferingTest() {
+        public void TestFindingEdits() {
             var s = "Saturday";
             var t = "Sunday";
             var expected = 3;

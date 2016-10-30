@@ -6,7 +6,7 @@ using System.Collections.Generic;
 namespace EBAlgorithmsUnitTests {
     public class StringExtensionTests {
         [Fact]
-        public void StringExtensions_TestSwap() {
+        public void TestSwap() {
             var str = "cat";
             var expected = "tac";
             var result = str.Swap(0, 2);
@@ -14,7 +14,7 @@ namespace EBAlgorithmsUnitTests {
         }
 
         [Fact]
-        public void StringExtensions_TestPermutations() {
+        public void TestPermutations() {
             var str = "cat";
             var expected = new List<string> { "cat", "act", "tca", "cta", "atc", "tac" };
             var result = str.FindPermutations();
@@ -22,7 +22,7 @@ namespace EBAlgorithmsUnitTests {
         }
 
         [Fact] 
-        public void StringExtensions_TestIsPalindrome() {
+        public void TestIsPalindrome() {
             var palindromes = new List<string> { "lol", "abcdefedcba", "elle" };
             var nonPalindromes = new List<string> { "abc", "hi", "asdf" };
 

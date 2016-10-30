@@ -8,7 +8,7 @@ namespace EBAlgorithmsUnitTests {
     public class AVLSortTests {
 
         [Fact]
-        public void AVLSort_Integers() {
+        public void TestSortingIntegers() {
             var numbers = new List<int>(TestData.Numbers);
 
             numbers.AVLSort();
